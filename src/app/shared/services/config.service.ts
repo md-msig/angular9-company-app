@@ -6,6 +6,9 @@ import { TemplateConfig } from "../template-config/config.interface";
   providedIn: "root"
 })
 export class ConfigService {
+  private server_address = 'http://ec2-3-7-8-26.ap-south-1.compute.amazonaws.com:8080';
+  // private server_address = 'http://localhost:8080';
+  public page_title = 'Login';
   public templateConf: TemplateConfig;
 
   constructor() {
