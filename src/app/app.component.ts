@@ -26,13 +26,9 @@ export class AppComponent implements OnInit, OnDestroy {
             .subscribe(() => window.scrollTo(0, 0));
     }
 
-
     ngOnDestroy() {
         if (this.subscription) {
             this.subscription.unsubscribe();
         }
     }
-
-
-
 }

@@ -4,30 +4,33 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ConfigService } from '../services/config.service';
+// import { AuthComponent } from './../../auth/auth.component';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
+  constructor(
+    private http: HttpClient,
+    public router: Router,
+    // public authcomponent: AuthComponent
+    public configservice: ConfigService
+  ) {
+  }
   unauthorized_msg: string = 'Unauthorized User. Please contact administrator for access.';
   welcome_msg: string = 'Welcome, please login to your account.';
   expired_msg: string = 'Session expired. Please login again.';
+  message: string = this.welcome_msg;
+  headers = this.configservice.headers;
+  host_url: string = this.configservice.host_url;
   
-  endpoint: string = 'http://ec2-3-7-8-26.ap-south-1.compute.amazonaws.com:8080';
-  headers = new HttpHeaders({'Access-Control-Allow-Origin':'*', 'Access-Control-Allow-Headers':'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Methods':'GET, POST, OPTIONS, PUT, PATCH, DELETE', 'Content-Type':'application/json', 'User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0', 'X-Forwarded-For':'203.0.113.195'});
-  // headers = new HttpHeaders({'Content-Type':'application/json', 'User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0', 'X-Forwarded-For':'203.0.113.195'});
   currentUser = {};
-
-  constructor(
-    private http: HttpClient,
-    public router: Router
-  ) {
-  }
 
   // Sign-up
   signUp(user: User): Observable<any> {
-    let api = this.endpoint + "/register-user";
+    let api = this.host_url + "/register-user";
     return this.http.post(api, user)
       .pipe(
         catchError(this.handleError)
@@ -36,20 +39,24 @@ export class AuthService {
 
   // Sign-in
   signIn(user: User) {
-    this.router.navigate(['datatables/filter']);
-    // let api = this.endpoint + "/auth";
-    // return this.http.post(api, JSON.stringify(user),{headers: this.headers}).subscribe((res) => {
-    //   console.log(res);
-    // });
-      // .subscribe((res) => {
-      //   console.log(res);
-      //   // localStorage.setItem('access_token', res.token)
-      //   // this.getUserProfile(res._id).subscribe((res) => {
-      //   //   this.currentUser = res;
-      //   //   console.log(this.currentUser);
-      //   //   this.router.navigate(['user-profile/' + res.msg._id]);
-      //   // })
-      // })
+    let api = this.host_url + '/auth';
+    return this.http.post(api, JSON.stringify(user), {headers: this.headers})
+      .subscribe(
+        (res: any) => {
+          localStorage.setItem('access_token', res.token);
+          if((typeof res == 'object') && (res['role']=='ROLE_ERPADMIN' || res['role']=='ROLE_ERPAUTHADMIN' || res['role']=='ROLE_ERPUSER')){
+            this.getGroupCompanies().subscribe((res) => {
+              this.configservice.company_data = res;
+              this.router.navigate(['company/list']);
+            })
+          }else {
+          }
+        },
+        (err) => {
+          if((err.status == '403') && (typeof err.error == 'string' && err.error == 'Invalid Username or Password.')){
+          }          
+        }
+      )
   }
 
   getToken() {
@@ -68,9 +75,10 @@ export class AuthService {
     }
   }
 
-  // User profile
-  getUserProfile(id): Observable<any> {
-    let api = `${this.endpoint}/user-profile/${id}`;
+  // Company Groups
+  getGroupCompanies(): Observable<any> {
+    let api = this.host_url + '/companygroups';
+    this.headers = this.headers.append('Authorization', 'Bearer ' + this.getToken());
     return this.http.get(api, { headers: this.headers }).pipe(
       map((res: Response) => {
         return res || {}

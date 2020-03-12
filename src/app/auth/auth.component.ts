@@ -22,7 +22,7 @@ export class AuthComponent implements OnInit {
     })
   }
   
-  message = this.authService.welcome_msg;
+  message = this.authService.message;
 
   ngOnInit(): void {
   }
