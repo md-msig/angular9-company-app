@@ -25,7 +25,7 @@ export class AuthService {
   message: string = this.welcome_msg;
   headers = this.configservice.headers;
   host_url: string = this.configservice.host_url;
-  
+
   currentUser = {};
 
   // Sign-up
@@ -40,21 +40,21 @@ export class AuthService {
   // Sign-in
   signIn(user: User) {
     let api = this.host_url + '/auth';
-    return this.http.post(api, JSON.stringify(user), {headers: this.headers})
+    return this.http.post(api, JSON.stringify(user), { headers: this.headers })
       .subscribe(
         (res: any) => {
           localStorage.setItem('access_token', res.token);
-          if((typeof res == 'object') && (res['role']=='ROLE_ERPADMIN' || res['role']=='ROLE_ERPAUTHADMIN' || res['role']=='ROLE_ERPUSER')){
+          if ((typeof res == 'object') && (res['role'] == 'ROLE_ERPADMIN' || res['role'] == 'ROLE_ERPAUTHADMIN' || res['role'] == 'ROLE_ERPUSER')) {
             this.getGroupCompanies().subscribe((res) => {
               this.configservice.company_data = res;
               this.router.navigate(['company/list']);
             })
-          }else {
+          } else {
           }
         },
         (err) => {
-          if((err.status == '403') && (typeof err.error == 'string' && err.error == 'Invalid Username or Password.')){
-          }          
+          if ((err.status == '403') && (typeof err.error == 'string' && err.error == 'Invalid Username or Password.')) {
+          }
         }
       )
   }

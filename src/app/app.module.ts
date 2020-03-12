@@ -14,9 +14,9 @@ import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { StoreModule } from "@ngrx/store";
 
-import { 
-  PerfectScrollbarModule, 
-  PERFECT_SCROLLBAR_CONFIG, 
+import {
+  PerfectScrollbarModule,
+  PERFECT_SCROLLBAR_CONFIG,
   PerfectScrollbarConfigInterface
 } from 'ngx-perfect-scrollbar';
 //Modules Import End
@@ -27,6 +27,8 @@ import { AppComponent } from "./app.component";
 import { ContentLayoutComponent } from "./layouts/content/content-layout.component";
 import { FullLayoutComponent } from "./layouts/full/full-layout.component";
 import { AuthComponent } from './auth/auth.component';
+import { ComAddComponent } from './shared/modals/comadd/comadd.component';
+import { ComEditComponent } from './shared/modals/comedit/comedit.component';
 //Components Import End
 
 //Services Import Start
@@ -88,4 +90,4 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

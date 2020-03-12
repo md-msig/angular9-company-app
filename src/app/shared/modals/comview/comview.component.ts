@@ -14,7 +14,7 @@ export class ComViewComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ComViewComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   onNoClick(): void {
     this.dialogRef.close();

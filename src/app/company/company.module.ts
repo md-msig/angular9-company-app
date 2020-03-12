@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CommonModule } from "@angular/common";
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { CompanyRoutingModule } from "./company-routing.module";
@@ -16,7 +17,9 @@ import { MaterialModule } from './../material.module';
         CommonModule,
         CompanyRoutingModule,
         NgxDatatableModule,
-        MaterialModule
+        MaterialModule,
+        ReactiveFormsModule,
+        FormsModule,
     ],
     declarations: [
         CompanyListComponent, ComViewComponent, ComAddComponent, ComEditComponent

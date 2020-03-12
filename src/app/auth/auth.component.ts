@@ -9,19 +9,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-  
+
   loginForm: FormGroup;
   constructor(
     public fb: FormBuilder,
     public authService: AuthService,
     public router: Router
-  ) { 
+  ) {
     this.loginForm = this.fb.group({
       username: [''],
       password: ['']
     })
   }
-  
+
   message = this.authService.message;
 
   ngOnInit(): void {

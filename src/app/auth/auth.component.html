@@ -1,52 +1,33 @@
 <!--Login Page Starts-->
 <section id="login">
-    <div class="container-fluid">
-      <div class="row full-height-vh m-0">
-        <div class="col-12 d-flex align-items-center justify-content-center">
-          <div class="card">
-            <div class="card-content">
-              <div class="card-body login-img">
-                <div class="row m-0">
-                  <div
-                    class="col-lg-6 d-lg-block d-none py-2 px-3 text-center align-middle"
-                  >
-                    <img
-                      src="../../assets/img/gallery/login.png"
-                      alt=""
-                      class="img-fluid mt-5"
-                      width="400"
-                      height="230"
-                    />
-                  </div>
-                  <div class="col-lg-6 col-md-12 bg-white px-4 login-div">
-                    <p class="card-text mb-3">
-                      {{ message }}
-                    </p>
-                    <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
-                    <input
-                      type="text"
-                      class="form-control mb-3"
-                      formControlName="username"
-                      placeholder="Username@CompanyGroupID"
-                    />
-                    <input
-                      type="password"
-                      class="form-control mb-3"
-                      formControlName="password"
-                      placeholder="Password"
-                    />
+  <div class="container-fluid">
+    <div class="row full-height-vh m-0">
+      <div class="col-12 d-flex align-items-center justify-content-center">
+        <div class="card">
+          <div class="card-content">
+            <div class="card-body login-img">
+              <div class="row m-0">
+                <div class="col-lg-6 d-lg-block d-none py-2 px-3 text-center align-middle">
+                  <img src="../../assets/img/gallery/login.png" alt="" class="img-fluid mt-5" width="400"
+                    height="230" />
+                </div>
+                <div class="col-lg-6 col-md-12 bg-white px-4 login-div">
+                  <p class="card-text mb-3">
+                    {{ message }}
+                  </p>
+                  <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+                    <input type="text" class="form-control mb-3" formControlName="username"
+                      placeholder="Username@CompanyGroupID" />
+                    <input type="password" class="form-control mb-3" formControlName="password"
+                      placeholder="Password" />
                     <div class="fg-actions d-flex justify-content-between login-button">
                       <div class="recover-pass">
                         <button type="submit" class="btn btn-primary">
-                          <a
-                            class="text-decoration-none text-white"
-                            >Login</a
-                          >
+                          <a class="text-decoration-none text-white">Login</a>
                         </button>
                       </div>
                     </div>
-                    </form>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -54,6 +35,6 @@
         </div>
       </div>
     </div>
-  </section>
-  <!--Login Page Ends-->
-  
+  </div>
+</section>
+<!--Login Page Ends-->
