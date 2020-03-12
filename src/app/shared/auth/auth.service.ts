@@ -1,30 +1,102 @@
-import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { User } from './user';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { ConfigService } from '../services/config.service';
+// import { AuthComponent } from './../../auth/auth.component';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
+
 export class AuthService {
-  token: string;
+  constructor(
+    private http: HttpClient,
+    public router: Router,
+    // public authcomponent: AuthComponent
+    public configservice: ConfigService
+  ) {
+  }
+  unauthorized_msg: string = 'Unauthorized User. Please contact administrator for access.';
+  welcome_msg: string = 'Welcome, please login to your account.';
+  expired_msg: string = 'Session expired. Please login again.';
+  message: string = this.welcome_msg;
+  headers = this.configservice.headers;
+  host_url: string = this.configservice.host_url;
+  
+  currentUser = {};
 
-  constructor() {}
-
-  signupUser(email: string, password: string) {
-    //your code for signing up the new user
+  // Sign-up
+  signUp(user: User): Observable<any> {
+    let api = this.host_url + "/register-user";
+    return this.http.post(api, user)
+      .pipe(
+        catchError(this.handleError)
+      )
   }
 
-  signinUser(email: string, password: string) {
-    //your code for checking credentials and getting tokens for for signing in user
+  // Sign-in
+  signIn(user: User) {
+    let api = this.host_url + '/auth';
+    return this.http.post(api, JSON.stringify(user), {headers: this.headers})
+      .subscribe(
+        (res: any) => {
+          localStorage.setItem('access_token', res.token);
+          if((typeof res == 'object') && (res['role']=='ROLE_ERPADMIN' || res['role']=='ROLE_ERPAUTHADMIN' || res['role']=='ROLE_ERPUSER')){
+            this.getGroupCompanies().subscribe((res) => {
+              this.configservice.company_data = res;
+              this.router.navigate(['company/list']);
+            })
+          }else {
+          }
+        },
+        (err) => {
+          if((err.status == '403') && (typeof err.error == 'string' && err.error == 'Invalid Username or Password.')){
+          }          
+        }
+      )
   }
 
-  logout() {   
-    this.token = null;
+  getToken() {
+    return localStorage.getItem('access_token');
   }
 
-  getToken() {    
-    return this.token;
+  get isLoggedIn(): boolean {
+    let authToken = localStorage.getItem('access_token');
+    return (authToken !== null) ? true : false;
   }
 
-  isAuthenticated() {
-    // here you can check if user is authenticated or not through his token 
-    return true;
+  doLogout() {
+    let removeToken = localStorage.removeItem('access_token');
+    if (removeToken == null) {
+      this.router.navigate(['log-in']);
+    }
+  }
+
+  // Company Groups
+  getGroupCompanies(): Observable<any> {
+    let api = this.host_url + '/companygroups';
+    this.headers = this.headers.append('Authorization', 'Bearer ' + this.getToken());
+    return this.http.get(api, { headers: this.headers }).pipe(
+      map((res: Response) => {
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+  // Error 
+  handleError(error: HttpErrorResponse) {
+    let msg = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      msg = error.error.message;
+    } else {
+      // server-side error
+      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(msg);
   }
 }

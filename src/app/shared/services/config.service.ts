@@ -1,12 +1,21 @@
 import { Injectable } from "@angular/core";
 import { Subject, BehaviorSubject } from "rxjs";
 import { TemplateConfig } from "../template-config/config.interface";
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: "root"
 })
 export class ConfigService {
+  public host_url = 'http://ec2-3-7-8-26.ap-south-1.compute.amazonaws.com:8080';
+  public headers = new HttpHeaders({
+    'Content-Type':'application/json',  
+    'X-Forwarded-For':'111.222.333.444'
+  });
+  // public host_url = 'http://localhost:8080';
+  public page_title = 'Login';
   public templateConf: TemplateConfig;
+  company_data: object;
 
   constructor() {
     this.setConfigValue();

@@ -1,0 +1,58 @@
+<!-- Filter Datatable Options Starts -->
+<section id="filter" class="mb-3" id="component_list">
+    <!-- <div class="row text-left">
+        <div class="col-12">
+            <div class="content-header">Filter Option</div>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col-sm-12">
+            <a (click)='addCompanyGroup()' class="btn btn-raised gradient-purple-bliss white shadow-z-1-hover float-right"><i class="fa fa-plus"></i> Add Company Group</a>
+        </div>
+        <div class="col-sm-12">
+            <!-- <input type='text' style='padding:8px;margin:15px auto;width:30%;' placeholder='Type to filter the name column...' (keyup)='updateFilter($event)'
+            /> -->
+            <ngx-datatable #table class="bootstrap"
+            [columns]="columns"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="'auto'"
+            [limit]="10"
+            [rows]='rows'
+            [sorts]="[{prop: 'date_modified', dir: 'desc'}]">
+            
+            <ngx-datatable-column name="Group ID" prop="id">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                    <span class='link' (click)='companyGroupDetails(row.id)'>{{ value }}</span>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Name" prop="companyGroupName"></ngx-datatable-column>
+            <ngx-datatable-column name="Date Modified" prop="date_modified">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                    <span>{{ value }}</span>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Status" prop="active">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                    <span *ngIf='value==true; else disabled;'>Enabled</span>
+                    <ng-template #disabled><span>Disabled</span></ng-template>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Licenses">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+                    <span class='link' (click)='companyLicenseDetails(row)'>Licenses</span>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Actions" prop="action">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                    <span class="action-edit" (click)='modifyCompanyDetails(row)'>Edit</span>
+                    <span class="action-license" (click)='moduleLicenses(row)'>Licenses</span>
+                </ng-template>
+            </ngx-datatable-column>
+
+            </ngx-datatable>
+        </div>
+    </div>
+</section>
+<!-- Filter Datatable Options Ends -->
