@@ -1,0 +1,44 @@
+<!-- Filter Datatable Options Starts -->
+<section id="filter" class="mb-3" id="component_list">
+    <div class="row">
+        <div class="col-sm-12">
+            <a (click)='addModuleLicense()' class="btn btn-raised gradient-purple-bliss white shadow-z-1-hover float-right"><i class="fa fa-plus"></i> Add Module License</a>
+        </div>
+        <div class="col-sm-12">
+            <ngx-datatable #table class="bootstrap"
+            [columns]="columns"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="'auto'"
+            [limit]="15"
+            [rows]='rows'
+            [sorts]="[{prop: 'licenseEndDate', dir: 'desc'}]">
+            
+            <ngx-datatable-column name="Group ID" prop="companyGroupId">
+                <!-- <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                    <span class='link' (click)='companyGroupDetails(row.id)'>{{ value }}</span>
+                </ng-template> -->
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Module Name" prop="moduleName"></ngx-datatable-column>
+            <ngx-datatable-column name="Int User" prop="custInternalLicenseMaxCount"></ngx-datatable-column>
+            <ngx-datatable-column name="Ext User" prop="custExternalLicenseMaxCount"></ngx-datatable-column>
+            <ngx-datatable-column name="Int Used" prop="custInternalLicenseUsedCount"></ngx-datatable-column>
+            <ngx-datatable-column name="Ext Used" prop="custExternalLicenseUsedCount"></ngx-datatable-column>
+            <ngx-datatable-column name="Company" prop="companyLicenseCount"></ngx-datatable-column>
+            <ngx-datatable-column name="Location" prop="locationLicenseCount"></ngx-datatable-column>
+            <ngx-datatable-column name="Project" prop="projectLicenseCount"></ngx-datatable-column>
+            <ngx-datatable-column name="Start" prop="licenseStartDate"></ngx-datatable-column>
+            <ngx-datatable-column name="End" prop="licenseEndDate"></ngx-datatable-column>
+            <ngx-datatable-column name="Dtnull Date" prop="dtnullDate"></ngx-datatable-column>
+            <ngx-datatable-column name="Edit" prop="edit">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                    <span class="action-edit" (click)='modifyLicenseDetails(row.licenseId)'>Edit</span>
+                </ng-template>
+            </ngx-datatable-column>
+
+            </ngx-datatable>
+        </div>
+    </div>
+</section>
+<!-- Filter Datatable Options Ends -->
