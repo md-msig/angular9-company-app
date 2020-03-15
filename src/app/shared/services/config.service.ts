@@ -7,15 +7,25 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
   providedIn: "root"
 })
 export class ConfigService {
-  public host_url = 'http://ec2-3-7-8-26.ap-south-1.compute.amazonaws.com:8080';
-  public headers = new HttpHeaders({
+  unauthorized_msg = 'Unauthorized User. Please contact administrator for access.';
+  welcome_msg = 'Welcome, please login to your account.';
+  expired_msg = 'Session expired. Please login again.';
+  host_url = 'http://ec2-3-7-8-26.ap-south-1.compute.amazonaws.com:8080';
+  // host_url = 'http://localhost:8080';
+  group_id = '@1435984529';
+  group_filter = 'all';
+  headers = new HttpHeaders({
     'Content-Type':'application/json',  
     'X-Forwarded-For':'111.222.333.444'
   });
-  // public host_url = 'http://localhost:8080';
-  public page_title = 'Login';
-  public templateConf: TemplateConfig;
+  page_title = 'Login';
+  templateConf: TemplateConfig;
   company_data: object;
+  
+  //Toastr Notification Message
+  group_added_successfully = "Group Company added successfully!";
+  group_updated_successfully = "Group Company updated successfully!";
+  
 
   constructor() {
     this.setConfigValue();

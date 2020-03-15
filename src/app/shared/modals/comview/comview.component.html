@@ -10,63 +10,66 @@
                         <ul class="no-list-style">
                             <li class="mb-2">
                                 <span class="primary text-bold-500"><a> Group ID:</a></span> 
-                                <span class="line-height-2 d-block overflow-hidden">ID number:</span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.id }}</span>
                             </li>
                             <li class="mb-2">
-                                <span class="primary text-bold-500"><a> Group Company Name: </a></span>
-                                <span class="line-height-2 d-block overflow-hidden">Company A</span>
+                                <span class="primary text-bold-500"><a> Group Company Name:</a></span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.companyGroupName }}</span>
                             </li>
                             <li class="mb-2">
                                 <span class="primary text-bold-500"><a> WebsiteUrl:</a></span>
-                                <span class="line-height-2 d-block overflow-hidden">www.companyA.commm</span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.websiteUrl }}</span>
                             </li>
                             <li class="mb-2">
-                                <span class="primary text-bold-500"><a> Primay Contact Email: </a></span>
-                                <span class="line-height-2 d-block overflow-hidden">prashant@companyA.commm</span>
+                                <span class="primary text-bold-500"><a> Primay Contact Email:</a></span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.primaryContactEmail }}</span>
                             </li>
                             <li class="mb-2">
                                 <span class="primary text-bold-500"><a> Primay Contact Phone:</a></span>
-                                <span class="line-height-2 d-block overflow-hidden">+1 333-444-5555</span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.primaryContactPhone }}</span>
                             </li> 
                             <li class="mb-2">
-                                <span class="primary text-bold-500"><a> Max Devices Per User: </a></span>
-                                <span class="line-height-2 d-block overflow-hidden">5</span>
+                                <span class="primary text-bold-500"><a> Max Devices Per User:</a></span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.maxDevicePerUserCount }}</span>
                             </li>
                             <li class="mb-2">
-                                <span class="primary text-bold-500"><a> Failed Login Attempts to Lock: </a></span>
-                                <span class="line-height-2 d-block overflow-hidden">5</span>
+                                <span class="primary text-bold-500"><a> Failed Login Attempts to Lock:</a></span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.failedLoginAttemptsToLockUser }}</span>
                             </li>
                         </ul>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                         <ul class="no-list-style">
                             <li class="mb-2">
-                                <span class="primary text-bold-500"><a> Address 1: </a></span>
-                                <span class="line-height-2 d-block overflow-hidden">100 Washington Avenue</span>
+                                <span class="primary text-bold-500"><a> Address 1:</a></span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.hqStreet1 }}</span>
                             </li>
                             <li class="mb-2">
-                                <span class="primary text-bold-500"><a> Address 2: </a></span>
-                                <span class="line-height-2 d-block overflow-hidden"></span>
+                                <span class="primary text-bold-500"><a> Address 2:</a></span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.hqStreet2 }}</span>
                             </li>
                             <li class="mb-2">
-                                <span class="primary text-bold-500"><a> City: </a></span>
-                                <span class="line-height-2 d-block overflow-hidden">San Francisco</span>
+                                <span class="primary text-bold-500"><a> City:</a></span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.hqCity }}</span>
                             </li>
                             <li class="mb-2">
-                                <span class="primary text-bold-500"><a> State: </a></span>
-                                <span class="line-height-2 d-block overflow-hidden">California</span>
+                                <span class="primary text-bold-500"><a> State:</a></span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.hqState }}</span>
                             </li>
                             <li class="mb-2">
                                 <span class="primary text-bold-500"><a> Country:</a></span>
-                                <span class="line-height-2 d-block overflow-hidden">United States</span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.hqCountry }}</span>
                             </li>
                             <li class="mb-2">
                                 <span class="primary text-bold-500"><a> Postal Code:</a></span>
-                                <span class="line-height-2 d-block overflow-hidden">98989</span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.hqPostalCode }}</span>
                             </li>
                             <li class="mb-2">
                                 <span class="primary text-bold-500"><a> Is Enabled:</a></span>
-                                <span class="line-height-2 d-block overflow-hidden">True</span>
+                                <span class="line-height-2 v-value overflow-hidden" *ngIf = "data.detail.isActive; else isDisabled;">True</span>
+                                <ng-template #isDisabled>
+                                    <span class="line-height-2 v-value overflow-hidden">False</span>
+                                </ng-template>
                             </li>
                         </ul>
                     </div>
