@@ -6,30 +6,30 @@ import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ComViewComponent } from './../../shared/modals/comview/comview.component';
-import { ComAddComponent } from './../../shared/modals/comadd/comadd.component';
-import { ComEditComponent } from './../../shared/modals/comedit/comedit.component';
-import { ConfigService } from './../../shared/services/config.service';
-import { AuthService } from './../../shared/auth/auth.service';
+import { ComViewComponent } from './../shared/modals/comview/comview.component';
+import { ComAddComponent } from './../shared/modals/comadd/comadd.component';
+import { ComEditComponent } from './../shared/modals/comedit/comedit.component';
+import { ConfigService } from './../shared/services/config.service';
+import { AuthService } from './../shared/auth/auth.service';
 
 interface DialogData {
-    email: string;
+    // res: object;
 }
-declare var require: any;
-const data: any = require('../../shared/data/company.json');
+// declare var require: any;
+// const data: any = require('../../shared/data/company.json');
+
 
 @Component({
-    selector: 'app-company-list',
-    templateUrl: './company-list.component.html',
-    styleUrls: ['./company-list.component.scss']
+    selector: 'app-company',
+    templateUrl: './company.component.html',
+    styleUrls: ['./company.component.scss']
 })
 
-export class CompanyListComponent {
+export class CompanyComponent {
     @ViewChild(DatatableComponent) table: DatatableComponent;
-    // @ViewChild('buttonsTemplate') buttonsTemplate: TemplateRef<any>;
     rows = [];
     temp = [];
-    email: string;
+    data;
     columns = [
         { name: 'Group ID', prop: 'id', sortable: 'true', width: '10' },
         { name: 'Name', prop: 'companyGroupName', sortable: 'true', width: '20' },
@@ -46,9 +46,6 @@ export class CompanyListComponent {
         private http: HttpClient,
         public router: Router
     ) {
-        // const data: any = this.configservice.company_data;
-        this.temp = [...data];
-        this.rows = data;
     }
 
     headers = this.configservice.headers;
@@ -66,13 +63,31 @@ export class CompanyListComponent {
     }
 
     ngOnInit() {
+        this.getGroupCompanies().subscribe(
+            (res) => {
+            this.data = res;
+            this.temp = [...this.data];
+            this.rows = this.data;
+            },
+            (err) => {
+                this.router.navigate['auth'];
+            }
+        )
+    }
 
+    // Company Groups
+    getGroupCompanies(): Observable<any> {
+        let api = this.configservice.host_url + '/companygroups';
+        return this.http.get(api, { headers: this.headers }).pipe(
+            map((res: Response) => {
+                return res || {}
+            })
+        )
     }
 
     //Show Company Detail
     companyGroupDetails(id) {
         this.getGroupDetail(id).subscribe((res) => {
-            // console.log(res);
             this.dialog.open(ComViewComponent, {
                 width: '800px',
                 data: { detail: res }
@@ -83,7 +98,6 @@ export class CompanyListComponent {
     //Get detail data from the server
     getGroupDetail(id): Observable<any> {
         let api = this.configservice.host_url + '/companygroup/' + id;
-        this.headers = this.configservice.headers.append('Authorization', 'Bearer ' + this.authservice.getToken());
         return this.http.get(api, { headers: this.headers }).pipe(
             map((res: Response) => {
                 return res || {}
@@ -98,10 +112,27 @@ export class CompanyListComponent {
             width: '800px',
             data: {}
         });
+    }
 
-        dialogRef.afterClosed().subscribe(result => {
-            this.email = result;
-        });
+    //Edit Company Group
+    modifyCompanyDetails(id) {
+        let api = this.configservice.host_url + '/companygroup/' + id;
+        this.http.get(api, { headers: this.headers }).subscribe(
+        (res) => {
+            const dialogRef = this.dialog.open(ComEditComponent, {
+                width: '800px',
+                data: res
+            });
+        }),
+        (err) => {
+
+        }
+    }
+
+    //Show Module Licenses Page
+    moduleLicenses(id) {
+        this.configservice.group_filter = id;
+        this.router.navigate['license'];
     }
 
     // Error 

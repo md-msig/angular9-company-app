@@ -1,8 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfigService } from './../../../shared/services/config.service';
+import { NGXToastrService } from './../../../shared/services/toastr.service'
 import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
@@ -13,69 +14,68 @@ interface DialogData {
 @Component({
   selector: 'app-comadd',
   templateUrl: './comadd.component.html',
-  styleUrls: ['./comadd.component.scss']
+  styleUrls: ['./comadd.component.scss'],
+  providers: [NGXToastrService]
 })
 export class ComAddComponent implements OnInit {
-  addCompanyGroupForm: FormGroup;
+
   constructor(
     public fb: FormBuilder,
     public dialogRef: MatDialogRef<ComAddComponent>,
     public configservice: ConfigService,
     private http: HttpClient,
+    private toastr_service: NGXToastrService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+  }
+
+  headers = this.configservice.headers;
+  addCompanyGroupForm: FormGroup;
+  isSubmitted = false;
+
+  ngOnInit() {
     this.addCompanyGroupForm = this.fb.group({
-      companyGroupName: [''],
+      companyGroupName: ['', Validators.required],
       websiteUrl: [''],
       primaryContactEmail: [''],
       primaryContactPhone: [''],
-      maxDevicePerUserCount: [''],
-      failedLoginAttemptsToLockUser: [''],
+      maxDevicePerUserCount: ['5', Validators.required],
+      failedLoginAttemptsToLockUser: ['5', Validators.required],
       hqStreet1: [''],
       hqStreet2: [''],
-      hqCity: [''],
-      hqState: [''],
-      hqCountry: [''],
+      hqCity: ['', Validators.required],
+      hqState: ['', Validators.required],
+      hqCountry: ['', Validators.required],
       hqPostalCode: [''],
       isActive: ['true'] //should be changed
     })
   }
-  headers = this.configservice.headers;
+
+  get formControls() { return this.addCompanyGroupForm.controls; }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  //Show Company Detail
+  //Add Company Group
   addCompanyGroup() {
+    this.isSubmitted = true;
+    if (this.addCompanyGroupForm.invalid) {
+      return;
+    }
     let api = this.configservice.host_url + '/companygroup';
     this.headers = this.headers.append('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
-    // console.log(this.headers);
     return this.http.put(api, JSON.stringify(this.addCompanyGroupForm.value), { headers: this.headers })
-    .subscribe(
-      (res: any) => {
-        console.log(res);
-      },
-      (err) => {
-        if ((err.status == '403') && (typeof err.error == 'string' && err.error == 'Invalid Username or Password.')) {
+      .subscribe(
+        (res: any) => {
+          this.dialogRef.close();
+          this.toastr_service.typeSuccess(this.configservice.group_added_successfully);
+        },
+        (err) => {
+          this.toastr_service.timeout(err.error);
         }
-      }
-    )
+      )
   }
 
-  //Get detail data from the server
-  // getGroupDetail(id): Observable<any> {
-  //     let api = this.configservice.host_url + '/companygroup/' + id;
-  //     this.headers = this.configservice.headers.append('Authorization', 'Bearer ' + this.authservice.getToken());
-  //     return this.http.get(api, { headers: this.headers }).pipe(
-  //       map((res: Response) => {
-  //         return res || {}
-  //       }),
-  //       catchError(this.handleError)
-  //     )
-  // }
-
-  ngOnInit() {
-  }
   // Error 
   handleError(error: HttpErrorResponse) {
     let msg = '';

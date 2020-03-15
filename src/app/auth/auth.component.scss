@@ -46,4 +46,27 @@
       font-size: 14px;
     }
   }
+
+  .has-error {
+    border-color: red;
+  }
+  .help-block {
+    color: red;
+  }
+
+  .other-message{
+    background-color: #FF586B;
+    color: #820210;
+    border-radius: 3px;
+    padding: 10px;
+    font-weight: 500;
+  }
+
+  .welcome-message{
+    background-color: #0dcfc7;
+    color: #4e4e4e;
+    border-radius: 3px;
+    padding: 10px;
+    font-weight: 500;
+  }
 }

@@ -6,7 +6,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { CompanyRoutingModule } from "./company-routing.module";
 
-import { CompanyListComponent } from "./list/company-list.component";
+import { CompanyComponent } from "./company.component";
 import { ComViewComponent } from './../shared/modals/comview/comview.component';
 import { ComAddComponent } from './../shared/modals/comadd/comadd.component';
 import { ComEditComponent } from './../shared/modals/comedit/comedit.component';
@@ -22,7 +22,7 @@ import { MaterialModule } from './../material.module';
         FormsModule,
     ],
     declarations: [
-        CompanyListComponent, ComViewComponent, ComAddComponent, ComEditComponent
+        CompanyComponent, ComViewComponent, ComAddComponent, ComEditComponent
     ],
     entryComponents: [ComViewComponent, ComAddComponent, ComEditComponent]
 })

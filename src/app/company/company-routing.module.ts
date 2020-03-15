@@ -1,20 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CompanyListComponent } from "./list/company-list.component";
+import { CompanyComponent } from "./company.component";
 
 const routes: Routes = [
   {
     path: '',
-    children: [
-      {
-        path: 'list',
-        component: CompanyListComponent,
-        data: {
-          title: 'Company List'
-        }
-      }
-    ]
+    component: CompanyComponent,
+    data: {
+      title: 'Group Companies'
+    },
   }
 ];
 

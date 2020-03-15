@@ -1,0 +1,20 @@
+{
+    "licenseId": 12,
+    "companyGroupId": 1435984532,
+    "moduleName": "FinancialAccounting",
+    "custInternalLicenseMaxCount": 2,
+    "custExternalLicenseMaxCount": 2,
+    "licenseType": "NAMED",
+    "serverMac": "565565656",
+    "serverCpu": "45454545",
+    "serverIp": "222.2.21.2",
+    "companyLicenseCount": 1,
+    "locationLicenseCount": 1,
+    "projectLicenseCount": 1,
+    "custInternalLicenseUsedCount": 0,
+    "custExternalLicenseUsedCount": 0,
+    "licenseStartDate": "21-02-2020 12:00:00",
+    "licenseEndDate": "16-05-2022 12:00:00",
+    "dtnullDate": null,
+    "dtnullError": null
+  }

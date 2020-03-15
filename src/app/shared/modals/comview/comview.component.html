@@ -66,11 +66,10 @@
                             </li>
                             <li class="mb-2">
                                 <span class="primary text-bold-500"><a> Is Enabled:</a></span>
-                                <!-- <span class="line-height-2 v-value overflow-hidden"></span> -->
-                                <!-- <div class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0 v-value" style="display: inline;">
-                                    <input type="checkbox" class="custom-control-input" checked id="customcheckbox1">
-                                    <label class="custom-control-label" for="customcheckbox1"></label>
-                                </div> -->
+                                <span class="line-height-2 v-value overflow-hidden" *ngIf = "data.detail.isActive; else isDisabled;">True</span>
+                                <ng-template #isDisabled>
+                                    <span class="line-height-2 v-value overflow-hidden">False</span>
+                                </ng-template>
                             </li>
                         </ul>
                     </div>

@@ -12,14 +12,26 @@
                     height="230" />
                 </div>
                 <div class="col-lg-6 col-md-12 bg-white px-4 login-div">
-                  <p class="card-text mb-3">
-                    {{ message }}
-                  </p>
+                  <span *ngIf = "isWelcome; then welcome else other;"></span>
+                 <ng-template #welcome> <p class="card-text mb-3 welcome-message">{{ message }}</p> </ng-template>
+                 <ng-template #other> <p class="card-text mb-3 other-message">{{ message }}</p> </ng-template>
+                  
+                  
+                  
                   <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
-                    <input type="text" class="form-control mb-3" formControlName="username"
+
+                    <div *ngIf="isSubmitted && formControls.username.errors" class="help-block">
+                      <div *ngIf="formControls.username.errors.required">Username is required</div>
+                    </div>
+                    <input [ngClass]="{'has-error': isSubmitted && formControls.username.errors }" type="text" class="form-control mb-3" formControlName="username"
                       placeholder="Username@CompanyGroupID" />
-                    <input type="password" class="form-control mb-3" formControlName="password"
+
+                    <div *ngIf="isSubmitted && formControls.password.errors" class="help-block">
+                      <div *ngIf="formControls.password.errors.required">Password is required</div>
+                    </div>
+                    <input [ngClass]="{'has-error': isSubmitted && formControls.password.errors }" type="password" class="form-control mb-3" formControlName="password"
                       placeholder="Password" />
+
                     <div class="fg-actions d-flex justify-content-between login-button">
                       <div class="recover-pass">
                         <button type="submit" class="btn btn-primary">
