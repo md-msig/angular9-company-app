@@ -1,0 +1,121 @@
+<div style="position: relative;"><span class="btn btn-raised btn-sm btn-danger btn-round close-button"
+        (click)="onNoClick()"><i class="fa fa-times"></i></span></div>
+<h1 mat-dialog-title>Add Company Group</h1>
+<div mat-dialog-content>
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-content">
+                <div class="card-body">
+                    <form [formGroup]="addLicenseForm" (ngSubmit)="addLicense()">
+                        <div class="form-body">
+                            <!-- <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <div *ngIf="isSubmitted && formControls.companyGroupName.errors"
+                                            class="help-block">
+                                            <div *ngIf="formControls.companyGroupName.errors.required">Company Group
+                                                Name is required
+                                            </div>
+                                        </div>
+                                        <input
+                                            [ngClass]="{'has-error': isSubmitted && formControls.companyGroupName.errors }"
+                                            type="text" class="form-control" formControlName="companyGroupName"
+                                            placeholder="Group Company Name" value="aaaaa"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" formControlName="websiteUrl"
+                                            placeholder="Website URL" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" formControlName="primaryContactEmail"
+                                            placeholder="Primay Contact Email" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" formControlName="primaryContactPhone"
+                                            placeholder="Primay Contact Phone" />
+                                    </div>
+                                    <div class="form-group">
+                                        <div *ngIf="isSubmitted && formControls.maxDevicePerUserCount.errors"
+                                            class="help-block">
+                                            <div *ngIf="formControls.maxDevicePerUserCount.errors.required">Max Device
+                                                Per User Count is required
+                                            </div>
+                                        </div>
+                                        <input
+                                            [ngClass]="{'has-error': isSubmitted && formControls.maxDevicePerUserCount.errors }"
+                                            type="text" class="form-control" formControlName="maxDevicePerUserCount"
+                                            placeholder="Max Devices Per User" />
+                                    </div>
+                                    <div class="form-group">
+                                        <div *ngIf="isSubmitted && formControls.failedLoginAttemptsToLockUser.errors"
+                                            class="help-block">
+                                            <div *ngIf="formControls.failedLoginAttemptsToLockUser.errors.required">
+                                                Failed Login Attempts To Lock User is required
+                                            </div>
+                                        </div>
+                                        <input
+                                            [ngClass]="{'has-error': isSubmitted && formControls.failedLoginAttemptsToLockUser.errors }"
+                                            type="text" class="form-control"
+                                            formControlName="failedLoginAttemptsToLockUser"
+                                            placeholder="Failed Login Attempts to Lock" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" formControlName="hqStreet1"
+                                            placeholder="Address 1" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" formControlName="hqStreet2"
+                                            placeholder="Address 2" />
+                                    </div>
+                                    <div class="form-group">
+                                        <div *ngIf="isSubmitted && formControls.hqCity.errors" class="help-block">
+                                            <div *ngIf="formControls.hqCity.errors.required">City is required
+                                            </div>
+                                        </div>
+                                        <input [ngClass]="{'has-error': isSubmitted && formControls.hqCity.errors }"
+                                            type="text" class="form-control" formControlName="hqCity"
+                                            placeholder="City" />
+                                    </div>
+                                    <div class="form-group">
+                                        <div *ngIf="isSubmitted && formControls.hqState.errors" class="help-block">
+                                            <div *ngIf="formControls.hqState.errors.required">State is required
+                                            </div>
+                                        </div>
+                                        <input [ngClass]="{'has-error': isSubmitted && formControls.hqState.errors }"
+                                            type="text" class="form-control" formControlName="hqState"
+                                            placeholder="State" />
+                                    </div>
+                                    <div class="form-group">
+                                        <div *ngIf="isSubmitted && formControls.hqCountry.errors" class="help-block">
+                                            <div *ngIf="formControls.hqCountry.errors.required">Country is required
+                                            </div>
+                                        </div>
+                                        <input [ngClass]="{'has-error': isSubmitted && formControls.hqState.errors }"
+                                            type="text" class="form-control" formControlName="hqCountry"
+                                            placeholder="Country" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" formControlName="hqPostalCode"
+                                            placeholder="Postal Code" />
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="form-actions right">
+                            <button type="button" (click)="onNoClick()" class="btn btn-raised btn-warning mr-1">
+                                <i class="ft-x"></i> Cancel
+                            </button>
+                            <button type="submit" class="btn btn-raised btn-primary">
+                                <i class="fa fa-check-square-o"></i> Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+</div>

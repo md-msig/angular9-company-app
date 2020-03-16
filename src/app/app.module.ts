@@ -27,8 +27,6 @@ import { AppComponent } from "./app.component";
 import { ContentLayoutComponent } from "./layouts/content/content-layout.component";
 import { FullLayoutComponent } from "./layouts/full/full-layout.component";
 import { AuthComponent } from './auth/auth.component';
-import { ComAddComponent } from './shared/modals/comadd/comadd.component';
-import { ComEditComponent } from './shared/modals/comedit/comedit.component';
 //Components Import End
 
 //Services Import Start

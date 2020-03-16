@@ -14,18 +14,35 @@ export class ConfigService {
   // host_url = 'http://localhost:8080';
   group_id = '@1435984529';
   group_filter = 'all';
+
+  module_names = {
+    "1": "Select One",
+    "Collection": "Collection",
+    "Construction": "Construction",
+    "CustomerLogin": "CustomerLogin",
+    "FinancialAccounting": "FinancialAccounting",
+    "LeaseMaintenance": "LeaseMaintenance",
+    "PreSales": "PreSales",
+    "PurchaseInventory": "PurchaseInventory",
+    "Sales": "Sales"
+  }
+  license_types = {
+    "named": "Named",
+    "floating": "Floating"
+  }
   headers = new HttpHeaders({
-    'Content-Type':'application/json',  
-    'X-Forwarded-For':'111.222.333.444'
+    'Content-Type': 'application/json',
+    'X-Forwarded-For': '111.222.333.444'
   });
   page_title = 'Login';
   templateConf: TemplateConfig;
   company_data: object;
-  
+
   //Toastr Notification Message
   group_added_successfully = "Group Company added successfully!";
   group_updated_successfully = "Group Company updated successfully!";
-  
+  license_updated_successfully = "Module License updated successfully!";
+  license_added_successfully = "Module License added successfully!";
 
   constructor() {
     this.setConfigValue();

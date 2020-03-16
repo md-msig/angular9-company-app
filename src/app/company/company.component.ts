@@ -70,7 +70,7 @@ export class CompanyComponent {
             this.rows = this.data;
             },
             (err) => {
-                this.router.navigate['auth'];
+                this.router.navigate(['auth']);
             }
         )
     }
@@ -131,8 +131,9 @@ export class CompanyComponent {
 
     //Show Module Licenses Page
     moduleLicenses(id) {
+        console.log(id);
         this.configservice.group_filter = id;
-        this.router.navigate['license'];
+        this.router.navigate(['license']);
     }
 
     // Error 

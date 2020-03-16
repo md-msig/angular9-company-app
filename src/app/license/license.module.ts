@@ -8,8 +8,8 @@ import { LicenseRoutingModule } from "./license-routing.module";
 
 import { LicenseComponent } from "./license.component";
 // import { ComViewComponent } from './../shared/modals/comview/comview.component';
-// import { ComAddComponent } from './../shared/modals/comadd/comadd.component';
-// import { ComEditComponent } from './../shared/modals/comedit/comedit.component';
+import { LiAddComponent } from './../shared/modals/liadd/liadd.component';
+import { LiEditComponent } from './../shared/modals/liedit/liedit.component';
 import { MaterialModule } from './../material.module';
 
 @NgModule({
@@ -22,7 +22,8 @@ import { MaterialModule } from './../material.module';
         FormsModule,
     ],
     declarations: [
-        LicenseComponent
-    ]
+        LicenseComponent, LiAddComponent, LiEditComponent
+    ],
+    entryComponents: [LiAddComponent, LiEditComponent]
 })
 export class LicenseModule { }

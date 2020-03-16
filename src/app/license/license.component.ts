@@ -6,9 +6,8 @@ import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ComViewComponent } from './../shared/modals/comview/comview.component';
-import { ComAddComponent } from './../shared/modals/comadd/comadd.component';
-import { ComEditComponent } from './../shared/modals/comedit/comedit.component';
+import { LiAddComponent } from './../shared/modals/liadd/liadd.component';
+import { LiEditComponent } from './../shared/modals/liedit/liedit.component';
 import { ConfigService } from './../shared/services/config.service';
 import { AuthService } from './../shared/auth/auth.service';
 
@@ -27,6 +26,7 @@ export class LicenseComponent {
     rows = [];
     temp = [];
     data;
+    group_companies;
     columns = [
         { name: 'Group ID', prop: 'companyGroupId', sortable: 'true'},
         { name: 'Module Name', prop: 'moduleName', sortable: 'true'},
@@ -53,7 +53,7 @@ export class LicenseComponent {
     }
 
     headers = this.configservice.headers;
-    group_filter = this.configservice.group_filter;
+    group_filter;
 
     updateFilter(event) {
         const val = event.target.value.toLowerCase();
@@ -68,69 +68,62 @@ export class LicenseComponent {
     }
 
     ngOnInit() {
-        this.getModuleLicenses().subscribe(
-            (res) => {
-            this.data = res;
-            this.temp = [...this.data];
-            this.rows = this.data;
+        this.setGroupCompanies(); //set the "group_companies" variable
+        this.getModuleLicenses(); //get module licenses by GroupID and show datatable
+    }
+
+    //Get Module Licenses by GroupID
+    getModuleLicenses() {
+        this.group_filter = this.configservice.group_filter;
+        let api = this.configservice.host_url + '/licenses';
+        if(this.group_filter != "all") {
+            api += '/'+this.group_filter;
+        }
+        this.http.get(api, { headers: this.headers }).subscribe(
+            (res: any) => {
+                this.data = res;
+                this.temp = [...this.data];
+                this.rows = this.data;
             },
-            (err) => {
-                this.router.navigate['auth'];
+            (err: any) => {
+            }
+        );
+    }
+
+    //Get Group Company List and Set "group_companies" variable
+    setGroupCompanies(): void {
+        let com_group_api = this.configservice.host_url + '/companygroups';
+        this.http.get(com_group_api, {headers: this.headers}).subscribe(
+            (res: any) => {
+                this.group_companies = res;
+            },
+            (err: any) => {
+                // 
             }
         )
     }
 
-    // Company Groups
-    getModuleLicenses(): Observable<any> {
-        // let filter_group_id = this.configservice.filter_group_id;
-        // let end_point = ()
-        let api = this.configservice.host_url + '/licenses';
-        return this.http.get(api, { headers: this.headers }).pipe(
-            map((res: Response) => {
-                return res || {}
-            })
-        )
+    //Change Group Company
+    changeGroupCompany(event) {
+        this.configservice.group_filter = event.target.value;
+        this.getModuleLicenses();
     }
 
+    //Add Module License
     addModuleLicense() {
-
+        const dialogRef = this.dialog.open(LiAddComponent, {
+            width: '800px',
+            data: {}
+        });
     }
 
-    //Show Company Detail
-    // companyGroupDetails(id) {
-    //     this.getGroupDetail(id).subscribe((res) => {
-    //         this.dialog.open(ComViewComponent, {
-    //             width: '800px',
-    //             data: { detail: res }
-    //         });
-    //     })
-    // }
-
-    //Get detail data from the server
-    // getGroupDetail(id): Observable<any> {
-    //     let api = this.configservice.host_url + '/companygroup/' + id;
-    //     return this.http.get(api, { headers: this.headers }).pipe(
-    //         map((res: Response) => {
-    //             return res || {}
-    //         }),
-    //         catchError(this.handleError)
-    //     )
-    // }
-
-    //Add Company Group
-    // addCompanyGroup() {
-    //     const dialogRef = this.dialog.open(ComAddComponent, {
-    //         width: '800px',
-    //         data: {}
-    //     });
-    // }
-
-    //Edit Company Group
+    //Edit Module License
     modifyLicenseDetails(id) {
-        let api = this.configservice.host_url + '/companygroup/' + id;
+        
+        let api = this.configservice.host_url + '/license/' + id;
         this.http.get(api, { headers: this.headers }).subscribe(
         (res) => {
-            const dialogRef = this.dialog.open(ComEditComponent, {
+            const dialogRef = this.dialog.open(LiEditComponent, {
                 width: '800px',
                 data: res
             });
@@ -138,24 +131,5 @@ export class LicenseComponent {
         (err) => {
 
         }
-    }
-
-    //Show Module Licenses Page
-    // moduleLicenses(id) {
-    //     this.configservice.filter_group_id = id;
-    //     this.router.navigate['licenses'];
-    // }
-
-    // Error 
-    handleError(error: HttpErrorResponse) {
-        let msg = '';
-        if (error.error instanceof ErrorEvent) {
-            // client-side error
-            msg = error.error.message;
-        } else {
-            // server-side error
-            msg = 'Error Code: ${error.status}\nMessage: ${error.message}';
-        }
-        return throwError(msg);
     }
 }
