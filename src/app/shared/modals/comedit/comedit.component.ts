@@ -63,7 +63,6 @@ export class ComEditComponent implements OnInit {
       return;
     }
     let api = this.configservice.host_url + '/companygroup/' + group_id;
-    this.headers = this.headers.append('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
     return this.http.patch(api, JSON.stringify(this.editCompanyGroupForm.value), { headers: this.headers })
       .subscribe(
         (res: any) => {

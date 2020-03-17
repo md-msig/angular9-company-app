@@ -1,0 +1,131 @@
+<div style="position: relative;"><span class="btn btn-raised btn-sm btn-danger btn-round close-button"
+        (click)="onNoClick()"><i class="fa fa-times"></i></span></div>
+<h1 mat-dialog-title>Modify Module License</h1>
+<div mat-dialog-content>
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-content">
+                <div class="card-body">
+                    <form [formGroup]="editLicenseForm" (ngSubmit)="editModuleLicense(detail_data.licenseId)"
+                        novalidate>
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <ul class="no-list-style" style="padding: 0;">
+                                        <li class="mb-2">
+                                            <span class="primary text-bold-500"><a> Group ID:</a></span>
+                                            <span class="line-height-2 v-value overflow-hidden">{{ detail_data.companyGroupId }}</span>
+                                        </li>
+                                    </ul>
+                                    <input type="hidden" class="form-control" id="companyGroupId"
+                                            formControlName="companyGroupId"/>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <ul class="no-list-style" style="padding: 0;">
+                                        <li class="mb-2">
+                                            <span class="primary text-bold-500"><a> Module Name:</a></span>
+                                            <span class="line-height-2 v-value overflow-hidden">{{ detail_data.moduleName }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label for="companyLicenseCount">Company License Count</label>
+                                        <input type="text" class="form-control" id="companyLicenseCount"
+                                            formControlName="companyLicenseCount" required />
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !editLicenseForm.get('companyLicenseCount').valid">This
+                                            field is required and maxlength is 2</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label for="locationLicenseCount">Location License Count</label>
+                                        <input type="text" class="form-control" id="locationLicenseCount"
+                                            formControlName="locationLicenseCount" required />
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !editLicenseForm.get('locationLicenseCount').valid">This
+                                            field is required and maxlength is 2</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label for="projectLicenseCount">Project License Count</label>
+                                        <input type="text" class="form-control" id="projectLicenseCount"
+                                            formControlName="projectLicenseCount" required />
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !editLicenseForm.get('projectLicenseCount').valid">This
+                                            field is required and maxlength is 2</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label for="custInternalLicenseMaxCount">Internal User Count</label>
+                                        <input type="text" class="form-control" id="custInternalLicenseMaxCount"
+                                            formControlName="custInternalLicenseMaxCount" required />
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !editLicenseForm.get('custInternalLicenseMaxCount').valid">This
+                                            field is required and maxlength is 3</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label for="custExternalLicenseMaxCount">External User Count</label>
+                                        <input type="text" class="form-control" id="custExternalLicenseMaxCount"
+                                            formControlName="custExternalLicenseMaxCount" required />
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !editLicenseForm.get('custExternalLicenseMaxCount').valid">This
+                                            field is required and maxlength is 4</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label for="licenseType">License Type  </label>
+                                        <select class="form-control" id="licenseType" formControlName="licenseType">
+                                            <option *ngFor="let type of license_types | keyvalue" value="{{type.key}}"
+                                                [selected]="type.key == (detail_data.licenseType | lowercase)">
+                                                {{type.value}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label for="licenseStartDate">License Start Date</label>
+                                        <input type="datetime" class="form-control" id="licenseStartDate"
+                                            formControlName="licenseStartDate" required />
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !editLicenseForm.get('licenseStartDate').valid">This
+                                            field is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label for="licenseEndDate">License End Date</label>
+                                        <input type="datetime" class="form-control" id="licenseEndDate"
+                                            formControlName="licenseEndDate" required />
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !editLicenseForm.get('licenseEndDate').valid">This
+                                            field is required</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions right">
+                            <button type="button" (click)="onNoClick()" class="btn btn-raised btn-warning mr-1">
+                                <i class="ft-x"></i> Cancel
+                            </button>
+                            <button type="submit" class="btn btn-raised btn-primary">
+                                <i class="fa fa-check-square-o"></i> Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+</div>

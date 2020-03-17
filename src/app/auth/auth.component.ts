@@ -1,3 +1,4 @@
+import {Title} from "@angular/platform-browser";
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Observable, throwError } from 'rxjs';
@@ -13,14 +14,16 @@ import { ConfigService } from './../shared/services/config.service';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-
   constructor(
     public fb: FormBuilder,
     public authService: AuthService,
     public configService: ConfigService,
     private http: HttpClient,
-    public router: Router
-  ) { }
+    public router: Router,
+    private titleService:Title
+  ) { 
+    this.titleService.setTitle(this.configService.page_titles.login);
+  }
   loginForm: FormGroup;
   isSubmitted = false;
 

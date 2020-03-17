@@ -14,18 +14,45 @@ export class ConfigService {
   // host_url = 'http://localhost:8080';
   group_id = '@1435984529';
   group_filter = 'all';
+  companyName = '';
+  serverCpu = "45454545";
+  serverIp = "222.2.21.2";
+  serverMac = "565565656";
+
+  module_names = {
+    "selectone": "Select One",
+    "Collection": "Collection",
+    "Construction": "Construction",
+    "CustomerLogin": "CustomerLogin",
+    "FinancialAccounting": "FinancialAccounting",
+    "LeaseMaintenance": "LeaseMaintenance",
+    "PreSales": "PreSales",
+    "PurchaseInventory": "PurchaseInventory",
+    "Sales": "Sales"
+  }
+  license_types = {
+    "named": "Named",
+    "floating": "Floating"
+  }
+  isAddLicenseHidden = true;
   headers = new HttpHeaders({
-    'Content-Type':'application/json',  
-    'X-Forwarded-For':'111.222.333.444'
+    'Content-Type': 'application/json',
+    'X-Forwarded-For': '111.222.333.444'
   });
-  page_title = 'Login';
+  page_titles = {
+    'login': 'Login',
+    'company': 'Group Companies',
+    'license': 'Module Licenses'
+  };
+  cu_page = '';
   templateConf: TemplateConfig;
   company_data: object;
-  
+
   //Toastr Notification Message
   group_added_successfully = "Group Company added successfully!";
   group_updated_successfully = "Group Company updated successfully!";
-  
+  license_updated_successfully = "Module License updated successfully!";
+  license_added_successfully = "Module License added successfully!";
 
   constructor() {
     this.setConfigValue();

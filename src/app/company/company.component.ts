@@ -1,5 +1,6 @@
 import { Component, ViewChild, TemplateRef } from '@angular/core';
 import { DatatableComponent } from "@swimlane/ngx-datatable";
+import {Title} from "@angular/platform-browser";
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { catchError, map } from 'rxjs/operators';
@@ -31,12 +32,11 @@ export class CompanyComponent {
     temp = [];
     data;
     columns = [
-        { name: 'Group ID', prop: 'id', sortable: 'true', width: '10' },
-        { name: 'Name', prop: 'companyGroupName', sortable: 'true', width: '20' },
-        { name: 'Date Modified', prop: 'date_modified', sortable: 'true', width: '15' },
-        { name: 'Status', prop: 'active', sortable: 'true', width: '5' },
-        { name: 'Licenses', prop: '', sortable: 'false', width: '30' },
-        { name: 'Actions', prop: 'actions', sortable: 'false', width: '20' }
+        { name: 'Group ID', prop: 'id', sortable: 'true'},
+        { name: 'Name', prop: 'companyGroupName', sortable: 'true'},
+        { name: 'Date Modified', prop: 'date_modified', sortable: 'true'},
+        { name: 'Status', prop: 'active', sortable: 'true'},
+        { name: 'Actions', prop: 'actions', sortable: 'false' }
     ];
 
     constructor(
@@ -44,8 +44,11 @@ export class CompanyComponent {
         public configservice: ConfigService,
         public authservice: AuthService,
         private http: HttpClient,
-        public router: Router
+        public router: Router,
+        private titleService:Title
     ) {
+        this.titleService.setTitle(this.configservice.page_titles.company);
+        this.configservice.cu_page = this.configservice.page_titles.company;
     }
 
     headers = this.configservice.headers;
@@ -70,7 +73,7 @@ export class CompanyComponent {
             this.rows = this.data;
             },
             (err) => {
-                this.router.navigate['auth'];
+                this.router.navigate(['auth']);
             }
         )
     }
@@ -129,10 +132,12 @@ export class CompanyComponent {
         }
     }
 
-    //Show Module Licenses Page
-    moduleLicenses(id) {
-        this.configservice.group_filter = id;
-        this.router.navigate['license'];
+    //Show Module Licenses Page By Group ID
+    moduleLicenses(companyGroup) {
+        this.configservice.group_filter = companyGroup.id;
+        this.configservice.companyName = companyGroup.companyGroupName;
+        this.configservice.isAddLicenseHidden = false;
+        this.router.navigate(['license']);
     }
 
     // Error 
