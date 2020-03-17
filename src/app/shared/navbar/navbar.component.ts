@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   currentLang = "en";
   toggleClass = "ft-maximize";
   placement = "bottom-right";
+  nav_title;
   public isCollapsed = true;
   layoutSub: Subscription;
   @Output()
@@ -37,6 +38,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.config = this.configService.templateConf;
+    this.nav_title = this.configService.cu_page;
   }
 
   ngAfterViewInit() {

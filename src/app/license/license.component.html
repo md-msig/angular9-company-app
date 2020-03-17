@@ -2,7 +2,7 @@
 <section id="filter" class="mb-3" id="component_list">
     <div class="row">
         <div class="col-sm-12">
-            <div class="form-group col-md-3 mb-2 float-left">
+            <div class="form-group col-md-3 mb-2 company-filter float-left">
                 <select class="form-control" (change) = "changeGroupCompany($event)">
                     <option value="all">All</option>
                     <option *ngFor = "let company of group_companies" 
@@ -12,7 +12,7 @@
                     </option>
                 </select>
             </div>
-            <a (click)='addModuleLicense()'
+            <a (click)='addModuleLicense(group_filter)' [ngClass]="{'ele-hidden': isAddLicenseHidden }"
                 class="btn btn-raised gradient-purple-bliss white shadow-z-1-hover float-right"><i
                     class="fa fa-plus"></i> Add Module License</a>
         </div>

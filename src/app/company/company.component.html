@@ -32,15 +32,10 @@
                     <ng-template #disabled><span>Disabled</span></ng-template>
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Licenses">
-                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
-                    <span class='link' (click)='companyLicenseDetails(row)'>Licenses</span>
-                </ng-template>
-            </ngx-datatable-column>
             <ngx-datatable-column name="Actions" prop="action">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
                     <span class="action-edit" (click)='modifyCompanyDetails(row.id)'>Edit</span>
-                    <span class="action-license" (click)='moduleLicenses(row.id)'>Licenses</span>
+                    <span class="action-license" (click)='moduleLicenses(row)'>Licenses</span>
                 </ng-template>
             </ngx-datatable-column>
 

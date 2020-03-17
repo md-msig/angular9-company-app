@@ -16,7 +16,6 @@ export class AppComponent implements OnInit, OnDestroy {
     page_title: string;
 
     constructor(private router: Router, public configservice: ConfigService) {
-        this.page_title = this.configservice.page_title;
     }
 
     ngOnInit() {

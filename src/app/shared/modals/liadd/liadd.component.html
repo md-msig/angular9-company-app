@@ -1,107 +1,130 @@
 <div style="position: relative;"><span class="btn btn-raised btn-sm btn-danger btn-round close-button"
         (click)="onNoClick()"><i class="fa fa-times"></i></span></div>
-<h1 mat-dialog-title>Add Company Group</h1>
+<h1 mat-dialog-title>Add Module License</h1>
 <div mat-dialog-content>
     <div class="col-sm-12">
         <div class="card">
             <div class="card-content">
                 <div class="card-body">
-                    <form [formGroup]="addLicenseForm" (ngSubmit)="addLicense()">
+                    <form [formGroup]="addLicenseForm" (ngSubmit)="addModuleLicense()" novalidate>
                         <div class="form-body">
-                            <!-- <div class="row">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <ul class="no-list-style" style="padding: 0;">
+                                        <li class="mb-2">
+                                            <span class="primary text-bold-500"><a> Group ID:</a></span>
+                                            <span
+                                                class="line-height-2 v-value overflow-hidden">{{ group_filter }}</span>
+                                        </li>
+                                    </ul>
+                                    <input type="hidden" class="form-control" id="companyGroupId"
+                                        formControlName="companyGroupId" />
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <ul class="no-list-style" style="padding: 0;">
+                                        <li class="mb-2">
+                                            <span class="primary text-bold-500"><a> Company Group Name:</a></span>
+                                            <span class="line-height-2 v-value overflow-hidden">{{ companyName }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                     <div class="form-group">
-                                        <div *ngIf="isSubmitted && formControls.companyGroupName.errors"
-                                            class="help-block">
-                                            <div *ngIf="formControls.companyGroupName.errors.required">Company Group
-                                                Name is required
-                                            </div>
-                                        </div>
-                                        <input
-                                            [ngClass]="{'has-error': isSubmitted && formControls.companyGroupName.errors }"
-                                            type="text" class="form-control" formControlName="companyGroupName"
-                                            placeholder="Group Company Name" value="aaaaa"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" formControlName="websiteUrl"
-                                            placeholder="Website URL" />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" formControlName="primaryContactEmail"
-                                            placeholder="Primay Contact Email" />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" formControlName="primaryContactPhone"
-                                            placeholder="Primay Contact Phone" />
-                                    </div>
-                                    <div class="form-group">
-                                        <div *ngIf="isSubmitted && formControls.maxDevicePerUserCount.errors"
-                                            class="help-block">
-                                            <div *ngIf="formControls.maxDevicePerUserCount.errors.required">Max Device
-                                                Per User Count is required
-                                            </div>
-                                        </div>
-                                        <input
-                                            [ngClass]="{'has-error': isSubmitted && formControls.maxDevicePerUserCount.errors }"
-                                            type="text" class="form-control" formControlName="maxDevicePerUserCount"
-                                            placeholder="Max Devices Per User" />
-                                    </div>
-                                    <div class="form-group">
-                                        <div *ngIf="isSubmitted && formControls.failedLoginAttemptsToLockUser.errors"
-                                            class="help-block">
-                                            <div *ngIf="formControls.failedLoginAttemptsToLockUser.errors.required">
-                                                Failed Login Attempts To Lock User is required
-                                            </div>
-                                        </div>
-                                        <input
-                                            [ngClass]="{'has-error': isSubmitted && formControls.failedLoginAttemptsToLockUser.errors }"
-                                            type="text" class="form-control"
-                                            formControlName="failedLoginAttemptsToLockUser"
-                                            placeholder="Failed Login Attempts to Lock" />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" formControlName="hqStreet1"
-                                            placeholder="Address 1" />
+                                        <label for="moduleName">Module Name </label>
+                                        <select class="form-control" id="moduleName" formControlName="moduleName">
+                                            <option *ngFor="let module of module_names | keyvalue" value="{{module.key}}"
+                                                [selected]="module.key == 'selectone'">
+                                                {{module.value}}
+                                            </option>
+                                        </select>
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && ((addLicenseForm.get('moduleName').value == 'selectone') || !addLicenseForm.get('moduleName').valid)">Please select Module Name</small>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" formControlName="hqStreet2"
-                                            placeholder="Address 2" />
-                                    </div>
-                                    <div class="form-group">
-                                        <div *ngIf="isSubmitted && formControls.hqCity.errors" class="help-block">
-                                            <div *ngIf="formControls.hqCity.errors.required">City is required
-                                            </div>
-                                        </div>
-                                        <input [ngClass]="{'has-error': isSubmitted && formControls.hqCity.errors }"
-                                            type="text" class="form-control" formControlName="hqCity"
-                                            placeholder="City" />
-                                    </div>
-                                    <div class="form-group">
-                                        <div *ngIf="isSubmitted && formControls.hqState.errors" class="help-block">
-                                            <div *ngIf="formControls.hqState.errors.required">State is required
-                                            </div>
-                                        </div>
-                                        <input [ngClass]="{'has-error': isSubmitted && formControls.hqState.errors }"
-                                            type="text" class="form-control" formControlName="hqState"
-                                            placeholder="State" />
-                                    </div>
-                                    <div class="form-group">
-                                        <div *ngIf="isSubmitted && formControls.hqCountry.errors" class="help-block">
-                                            <div *ngIf="formControls.hqCountry.errors.required">Country is required
-                                            </div>
-                                        </div>
-                                        <input [ngClass]="{'has-error': isSubmitted && formControls.hqState.errors }"
-                                            type="text" class="form-control" formControlName="hqCountry"
-                                            placeholder="Country" />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" formControlName="hqPostalCode"
-                                            placeholder="Postal Code" />
+                                        <label for="companyLicenseCount">Company License Count</label>
+                                        <input type="text" class="form-control" id="companyLicenseCount"
+                                            formControlName="companyLicenseCount" required />
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !addLicenseForm.get('companyLicenseCount').valid">This
+                                            field is required and maxlength is 2</small>
                                     </div>
                                 </div>
-                            </div> -->
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label for="locationLicenseCount">Location License Count</label>
+                                        <input type="text" class="form-control" id="locationLicenseCount"
+                                            formControlName="locationLicenseCount" required />
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !addLicenseForm.get('locationLicenseCount').valid">This
+                                            field is required and maxlength is 2</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label for="projectLicenseCount">Project License Count</label>
+                                        <input type="text" class="form-control" id="projectLicenseCount"
+                                            formControlName="projectLicenseCount" required />
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !addLicenseForm.get('projectLicenseCount').valid">This
+                                            field is required and maxlength is 2</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label for="custInternalLicenseMaxCount">Internal User Count</label>
+                                        <input type="text" class="form-control" id="custInternalLicenseMaxCount"
+                                            formControlName="custInternalLicenseMaxCount" required />
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !addLicenseForm.get('custInternalLicenseMaxCount').valid">This
+                                            field is required and maxlength is 3</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label for="custExternalLicenseMaxCount">External User Count</label>
+                                        <input type="text" class="form-control" id="custExternalLicenseMaxCount"
+                                            formControlName="custExternalLicenseMaxCount" required />
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !addLicenseForm.get('custExternalLicenseMaxCount').valid">This
+                                            field is required and maxlength is 4</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label for="licenseType">License Type </label>
+                                        <select class="form-control" id="licenseType" formControlName="licenseType">
+                                            <option *ngFor="let type of license_types | keyvalue" value="{{type.key}}"
+                                                [selected]="type.key == 'named'">
+                                                {{type.value}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label for="licenseStartDate">License Start Date</label>
+                                        <input type="datetime" class="form-control" id="licenseStartDate"
+                                            formControlName="licenseStartDate" required />
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !addLicenseForm.get('licenseStartDate').valid">This
+                                            field is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label for="licenseEndDate">License End Date</label>
+                                        <input type="datetime" class="form-control" id="licenseEndDate"
+                                            formControlName="licenseEndDate" required />
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !addLicenseForm.get('licenseEndDate').valid">This
+                                            field is required</small>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-actions right">
                             <button type="button" (click)="onNoClick()" class="btn btn-raised btn-warning mr-1">

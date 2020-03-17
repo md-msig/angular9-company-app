@@ -20,14 +20,6 @@
                                     <input type="hidden" class="form-control" id="companyGroupId"
                                             formControlName="companyGroupId"/>
                                 </div>
-                                <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                    <ul class="no-list-style" style="padding: 0;">
-                                        <li class="mb-2">
-                                            <span class="primary text-bold-500"><a> Company Group Name:</a></span>
-                                            <span class="line-height-2 v-value overflow-hidden">{{ company_detail.companyGroupName }}</span>
-                                        </li>
-                                    </ul>
-                                </div> -->
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                     <ul class="no-list-style" style="padding: 0;">
                                         <li class="mb-2">
@@ -102,43 +94,23 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                     <div class="form-group">
                                         <label for="licenseStartDate">License Start Date</label>
-                                        <input type="date" class="form-control" id="licenseStartDate"
+                                        <input type="datetime" class="form-control" id="licenseStartDate"
                                             formControlName="licenseStartDate" required />
                                         <small class="form-text text-muted danger"
                                             *ngIf="isSubmitted && !editLicenseForm.get('licenseStartDate').valid">This
-                                            field is required and ........</small>
+                                            field is required</small>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                     <div class="form-group">
                                         <label for="licenseEndDate">License End Date</label>
-                                        <input type="date" class="form-control" id="licenseEndDate"
+                                        <input type="datetime" class="form-control" id="licenseEndDate"
                                             formControlName="licenseEndDate" required />
                                         <small class="form-text text-muted danger"
                                             *ngIf="isSubmitted && !editLicenseForm.get('licenseEndDate').valid">This
-                                            field is required and ........</small>
+                                            field is required</small>
                                     </div>
                                 </div>
-                                <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                    <div class="form-group">
-                                        <label for="dtnullDateTime">Dtnull Date Time</label>
-                                        <input type="date" class="form-control" id="dtnullDateTime"
-                                            formControlName="dtnullDateTime" required />
-                                        <small class="form-text text-muted danger"
-                                            *ngIf="isSubmitted && !editLicenseForm.get('dtnullDateTime').valid">This
-                                            field is required and ........</small>
-                                    </div>
-                                </div> -->
-                                <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                    <div class="form-group">
-                                        <label for="dtnullError">Dtnull Error</label>
-                                        <input type="text" class="form-control" id="dtnullError"
-                                            formControlName="dtnullError" required />
-                                        <small class="form-text text-muted danger"
-                                            *ngIf="isSubmitted && !editLicenseForm.get('dtnullError').valid">This
-                                            field is required and maxlength is 200</small>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                         <div class="form-actions right">

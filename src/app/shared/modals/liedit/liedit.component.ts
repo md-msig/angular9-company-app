@@ -19,7 +19,6 @@ interface DialogData {
 })
 export class LiEditComponent implements OnInit {
   detail_data;
-  company_detail;
   constructor(
     public fb: FormBuilder,
     public dialogRef: MatDialogRef<LiEditComponent>,
@@ -29,7 +28,6 @@ export class LiEditComponent implements OnInit {
     private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
       this.detail_data = data;
-      
   }
 
   headers = this.configservice.headers;
@@ -65,18 +63,17 @@ export class LiEditComponent implements OnInit {
       return;
     }
     this.editLicenseForm.value.licenseType = this.editLicenseForm.value.licenseType.toLowerCase();
-    console.log(JSON.stringify(this.editLicenseForm.value.licenseType));
     let api = this.configservice.host_url + '/license/' + licenseId;
     return this.http.patch(api, JSON.stringify(this.editLicenseForm.value), { headers: this.headers })
       .subscribe(
         (res: any) => {
         },
         (err) => {
-          if(err.status == "202" && err.error.text == "Module license updated successfully.") {
+          if(err.status == "202") {
             this.dialogRef.close();
             this.toastr_service.typeSuccess(this.configservice.license_updated_successfully);
           } else {
-            this.toastr_service.timeout(err.error.text);
+            this.toastr_service.timeout("Some errors are occured!");
           }
         }
       )

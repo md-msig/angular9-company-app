@@ -1,4 +1,5 @@
 import { Component, ViewChild, TemplateRef } from '@angular/core';
+import {Title} from "@angular/platform-browser";
 import { DatatableComponent } from "@swimlane/ngx-datatable";
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -48,12 +49,16 @@ export class LicenseComponent {
         public configservice: ConfigService,
         public authservice: AuthService,
         private http: HttpClient,
-        public router: Router
+        public router: Router,
+        public titleService: Title
     ) {
+        this.titleService.setTitle(this.configservice.page_titles.license);
+        this.configservice.cu_page = this.configservice.page_titles.license;
     }
 
     headers = this.configservice.headers;
     group_filter;
+    isAddLicenseHidden;
 
     updateFilter(event) {
         const val = event.target.value.toLowerCase();
@@ -70,22 +75,31 @@ export class LicenseComponent {
     ngOnInit() {
         this.setGroupCompanies(); //set the "group_companies" variable
         this.getModuleLicenses(); //get module licenses by GroupID and show datatable
+        
     }
 
     //Get Module Licenses by GroupID
     getModuleLicenses() {
         this.group_filter = this.configservice.group_filter;
+        this.isAddLicenseHidden = this.configservice.isAddLicenseHidden;
         let api = this.configservice.host_url + '/licenses';
+        let companyapi = this.configservice.host_url + '/companygroup';
         if(this.group_filter != "all") {
             api += '/'+this.group_filter;
+            companyapi += '/'+this.group_filter;
+            this.http.get(companyapi, { headers: this.headers }).subscribe(
+                (res: any) => {
+                    this.configservice.companyName = res.companyGroupName;
+                }
+            )
+        }else {
+            this.configservice.companyName = '';
         }
         this.http.get(api, { headers: this.headers }).subscribe(
             (res: any) => {
                 this.data = res;
                 this.temp = [...this.data];
                 this.rows = this.data;
-            },
-            (err: any) => {
             }
         );
     }
@@ -106,11 +120,21 @@ export class LicenseComponent {
     //Change Group Company
     changeGroupCompany(event) {
         this.configservice.group_filter = event.target.value;
+        this.configservice.isAddLicenseHidden = (event.target.value != "all") ? false : true ;
         this.getModuleLicenses();
     }
 
     //Add Module License
-    addModuleLicense() {
+    addModuleLicense(group_id) {
+        let api = this.configservice.host_url + '/companygroup/' + group_id;
+        this.http.get(api, { headers: this.headers }).subscribe(
+            (res) => {
+
+            },
+            (err) => {
+
+            }
+        )
         const dialogRef = this.dialog.open(LiAddComponent, {
             width: '800px',
             data: {}
@@ -119,7 +143,6 @@ export class LicenseComponent {
 
     //Edit Module License
     modifyLicenseDetails(id) {
-        
         let api = this.configservice.host_url + '/license/' + id;
         this.http.get(api, { headers: this.headers }).subscribe(
         (res) => {
