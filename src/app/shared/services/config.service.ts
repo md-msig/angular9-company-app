@@ -7,15 +7,52 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
   providedIn: "root"
 })
 export class ConfigService {
-  public host_url = 'http://ec2-3-7-8-26.ap-south-1.compute.amazonaws.com:8080';
-  public headers = new HttpHeaders({
-    'Content-Type':'application/json',  
-    'X-Forwarded-For':'111.222.333.444'
+  unauthorized_msg = 'Unauthorized User. Please contact administrator for access.';
+  welcome_msg = 'Welcome, please login to your account.';
+  expired_msg = 'Session expired. Please login again.';
+  host_url = 'http://ec2-3-7-8-26.ap-south-1.compute.amazonaws.com:8080';
+  // host_url = 'http://localhost:8080';
+  group_id = '@1435984529';
+  group_filter = 'all';
+  companyName = '';
+  serverCpu = "45454545";
+  serverIp = "222.2.21.2";
+  serverMac = "565565656";
+
+  module_names = {
+    "selectone": "Select One",
+    "Collection": "Collection",
+    "Construction": "Construction",
+    "CustomerLogin": "CustomerLogin",
+    "FinancialAccounting": "FinancialAccounting",
+    "LeaseMaintenance": "LeaseMaintenance",
+    "PreSales": "PreSales",
+    "PurchaseInventory": "PurchaseInventory",
+    "Sales": "Sales"
+  }
+  license_types = {
+    "named": "Named",
+    "floating": "Floating"
+  }
+  isAddLicenseHidden = true;
+  headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'X-Forwarded-For': '111.222.333.444'
   });
-  // public host_url = 'http://localhost:8080';
-  public page_title = 'Login';
-  public templateConf: TemplateConfig;
+  page_titles = {
+    'login': 'Login',
+    'company': 'Group Companies',
+    'license': 'Module Licenses'
+  };
+  cu_page = '';
+  templateConf: TemplateConfig;
   company_data: object;
+
+  //Toastr Notification Message
+  group_added_successfully = "Group Company added successfully!";
+  group_updated_successfully = "Group Company updated successfully!";
+  license_updated_successfully = "Module License updated successfully!";
+  license_added_successfully = "Module License added successfully!";
 
   constructor() {
     this.setConfigValue();

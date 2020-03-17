@@ -4,3 +4,12 @@
     right: 0px;
     cursor: pointer;
 }
+.close-button:hover {
+    background-color: red !important;
+}
+.has-error {
+    border-color: red;
+}
+.help-block {
+    color: red;
+}

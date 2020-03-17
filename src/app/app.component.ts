@@ -7,7 +7,8 @@ import { ConfigService } from "./shared/services/config.service";
 
 @Component({
     selector: 'app-root',
-    templateUrl: './app.component.html'
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
 
@@ -15,7 +16,6 @@ export class AppComponent implements OnInit, OnDestroy {
     page_title: string;
 
     constructor(private router: Router, public configservice: ConfigService) {
-        this.page_title = this.configservice.page_title;
     }
 
     ngOnInit() {

@@ -1,0 +1,27 @@
+#component_list {
+    .link:hover {
+        color: #0cc27e;
+        cursor: pointer;
+    }
+    .action-edit {
+        color: #f77f18;
+    }
+    .action-edit:hover {
+        color: #ffb817;
+        cursor: pointer;
+    }
+    .action-license {
+        color: green;
+        margin-left: 10px;
+    }
+    .action-license:hover {
+        color: #0cc27e;
+        cursor: pointer;
+    }
+    .ele-hidden {
+        display: none;
+    }
+    .company-filter {
+        padding-left: 0px !important;
+    }
+}
