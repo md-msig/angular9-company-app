@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LicenseComponent } from "./license.component";
+import { LicenseComponent } from "@app/license/license.component";
 
 const routes: Routes = [
   {

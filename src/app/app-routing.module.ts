@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
-import { AuthComponent } from './auth/auth.component';
+import { LoginComponent } from './login/login.component';
 
 import { FullLayoutComponent } from "./layouts/full/full-layout.component";
 import { ContentLayoutComponent } from "./layouts/content/content-layout.component";
@@ -17,7 +17,7 @@ const appRoutes: Routes = [
     // redirectTo: 'dashboard/dashboard1',
     pathMatch: 'full',
   },
-  { path: 'auth', component: AuthComponent },
+  { path: 'auth', component: LoginComponent },
   { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES, canActivate: [AuthGuard] },
   { path: '', component: ContentLayoutComponent, data: { title: 'content Views' }, children: CONTENT_ROUTES, canActivate: [AuthGuard] },
   {
@@ -33,4 +33,4 @@ const appRoutes: Routes = [
 
 export class AppRoutingModule {
 }
-export const RoutingComponent = [AuthComponent];
+export const RoutingComponent = [LoginComponent];

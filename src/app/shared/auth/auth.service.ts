@@ -1,34 +1,50 @@
 import { Injectable } from '@angular/core';
 import { User } from './user';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { ConfigService } from '../services/config.service';
-// import { AuthComponent } from './../../auth/auth.component';
+import { ConfigService } from '@shared/services/config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
+  private currentUserSubject: BehaviorSubject<User>;
+
   constructor(
     private http: HttpClient,
     public router: Router,
-    // public authcomponent: AuthComponent
     public configservice: ConfigService
   ) {
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
   }
 
   headers = this.configservice.headers;
   host_url = this.configservice.host_url;
   group_id = this.configservice.group_id;
 
+  public get currentUserValue(): User {
+    return this.currentUserSubject.value;
+  }
   // Sign-in
   signIn(user: User) {
     user['username'] += this.configservice.group_id;
     let api = this.host_url + '/auth';
-    return this.http.post(api, JSON.stringify(user), { headers: this.headers })
+    return this.http.post<any>(api, JSON.stringify(user), { headers: this.headers })
+      .pipe(map(res => {
+        if ((typeof res == 'object') && (res['role'] == 'ROLE_ERPADMIN' || res['role'] == 'ROLE_ERPAUTHADMIN' || res['role'] == 'ROLE_ERPUSER')) {
+          localStorage.setItem('access_token', res.token);
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUserSubject.next(res);
+          return res;
+        }
+      }));
+  }
+
+  logout() {
+
   }
 
   getToken() {

@@ -7,11 +7,11 @@ import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { LiAddComponent } from './../shared/modals/liadd/liadd.component';
-import { LiEditComponent } from './../shared/modals/liedit/liedit.component';
-import { LiViewComponent } from './../shared/modals/liview/liview.component';
-import { ConfigService } from './../shared/services/config.service';
-import { AuthService } from './../shared/auth/auth.service';
+import { LiAddComponent } from '@shared/modals/liadd/liadd.component';
+import { LiEditComponent } from '@shared/modals/liedit/liedit.component';
+import { LiViewComponent } from '@shared/modals/liview/liview.component';
+import { ConfigService } from '@shared/services/config.service';
+import { AuthService } from '@shared/auth/auth.service';
 
 interface DialogData {
     // res: object;
@@ -111,9 +111,6 @@ export class LicenseComponent {
         this.http.get(com_group_api, {headers: this.headers}).subscribe(
             (res: any) => {
                 this.group_companies = res;
-            },
-            (err: any) => {
-                // 
             }
         )
     }
@@ -139,24 +136,12 @@ export class LicenseComponent {
                         });
                     }
                 );
-            },
-            (err : any) => {
-
             }
         )
     }
 
     //Add Module License
     addModuleLicense(group_id) {
-        let api = this.configservice.host_url + '/companygroup/' + group_id;
-        this.http.get(api, { headers: this.headers }).subscribe(
-            (res) => {
-
-            },
-            (err) => {
-
-            }
-        )
         const dialogRef = this.dialog.open(LiAddComponent, {
             width: '800px',
             data: {}
@@ -172,9 +157,6 @@ export class LicenseComponent {
                 width: '800px',
                 data: res
             });
-        }),
-        (err) => {
-
-        }
+        })
     }
 }

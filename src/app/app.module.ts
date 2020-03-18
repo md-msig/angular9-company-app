@@ -5,11 +5,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AppRoutingModule } from "./app-routing.module";
-import { SharedModule } from "./shared/shared.module";
+import { SharedModule } from "@shared/shared.module";
 import { ToastrModule } from "ngx-toastr";
 import { AgmCoreModule } from "@agm/core";
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { AuthInterceptor } from './shared/auth/authconfig.interceptor';
+import { JwtInterceptor } from '@shared/auth/jwt.interceptor';
+import { ErrorInterceptor } from '@shared/auth/error.interceptor';
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { StoreModule } from "@ngrx/store";
@@ -26,14 +27,14 @@ import {
 import { AppComponent } from "./app.component";
 import { ContentLayoutComponent } from "./layouts/content/content-layout.component";
 import { FullLayoutComponent } from "./layouts/full/full-layout.component";
-import { AuthComponent } from './auth/auth.component';
+import { LoginComponent } from '@app/login/login.component';
 //Components Import End
 
 //Services Import Start
 import { DragulaService } from "ng2-dragula";
-import { AuthService } from "./shared/auth/auth.service";
-import { AuthGuard } from "./shared/auth/auth.guard";
-import { ConfigService } from "./shared/services/config.service";
+import { AuthService } from "@shared/auth/auth.service";
+import { AuthGuard } from "@shared/auth/auth.guard";
+import { ConfigService } from "@shared/services/config.service";
 //Services Import End
 
 
@@ -47,7 +48,7 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, FullLayoutComponent, ContentLayoutComponent, AuthComponent],
+  declarations: [AppComponent, FullLayoutComponent, ContentLayoutComponent, LoginComponent],
   imports: [
     BrowserAnimationsModule,
     ReactiveFormsModule,
@@ -74,11 +75,8 @@ export function createTranslateLoader(http: HttpClient) {
     AuthService,
     AuthGuard,
     ConfigService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     DragulaService,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,

@@ -1,43 +1,52 @@
-import {Title} from "@angular/platform-browser";
+import { Title } from "@angular/platform-browser";
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { first, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { AuthService } from "./../shared/auth/auth.service";
-import { Router } from '@angular/router';
-import { ConfigService } from './../shared/services/config.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from "@shared/auth/auth.service";
+import { ConfigService } from '@shared/services/config.service';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class AuthComponent implements OnInit {
+export class LoginComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     public authService: AuthService,
     public configService: ConfigService,
     private http: HttpClient,
+    private route: ActivatedRoute,
     public router: Router,
-    private titleService:Title
-  ) { 
+    private titleService: Title
+  ) {
     this.titleService.setTitle(this.configService.page_titles.login);
+
+    if (this.authService.currentUserValue) {
+      this.router.navigate(['company']);
+    }
   }
   loginForm: FormGroup;
   isSubmitted = false;
+  loading = false;
+  returnUrl: string;
+  error = '';
 
-  isWelcome = true;
   message = this.configService.welcome_msg;
 
   host_url = this.configService.host_url;
   headers = this.configService.headers;
-  
+
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'company';
   }
 
   get formControls() { return this.loginForm.controls; }
@@ -47,23 +56,18 @@ export class AuthComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    this.authService.signIn(this.loginForm.value).subscribe(
-      (res: any) => {
-        localStorage.setItem('access_token', res.token);
-        if ((typeof res == 'object') && (res['role'] == 'ROLE_ERPADMIN' || res['role'] == 'ROLE_ERPAUTHADMIN' || res['role'] == 'ROLE_ERPUSER')) {
-            this.router.navigate(['company']);
-        } else {
+    this.loading = true;
+    this.authService.signIn(this.loginForm.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate([this.returnUrl]);
+        },
+        error => {
+          this.error = error.error;
           this.message = this.configService.unauthorized_msg;
-          this.isWelcome = false;
-          this.router.navigate(['auth']);
-        }
-      },
-      (err: any) => {
-        this.message = this.configService.unauthorized_msg;
-        this.isWelcome = false;
-        this.router.navigate(['auth']);
-      }
-    )
+          this.loading = false;
+        });
   }
 
   // Company Groups

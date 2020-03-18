@@ -4,7 +4,7 @@
     "importHelpers": true,
     "module": "esnext",
     "outDir": "./dist/out-tsc",
-    "baseUrl": "src",
+    "baseUrl": "./",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -17,7 +17,12 @@
     "lib": [
       "es2016",
       "dom"
-    ]
+    ],
+    "paths": {
+        "@app/*": ["src/app/*"],
+        "@environments/*": ["src/environments/*"],
+        "@shared/*": ["src/app/shared/*"],
+    }
   },
   "angularCompilerOptions": {
     "preserveWhitespaces": false

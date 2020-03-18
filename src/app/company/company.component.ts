@@ -7,17 +7,17 @@ import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ComViewComponent } from './../shared/modals/comview/comview.component';
-import { ComAddComponent } from './../shared/modals/comadd/comadd.component';
-import { ComEditComponent } from './../shared/modals/comedit/comedit.component';
-import { ConfigService } from './../shared/services/config.service';
-import { AuthService } from './../shared/auth/auth.service';
+import { ComViewComponent } from '@shared/modals/comview/comview.component';
+import { ComAddComponent } from '@shared/modals/comadd/comadd.component';
+import { ComEditComponent } from '@shared/modals/comedit/comedit.component';
+import { ConfigService } from '@shared/services/config.service';
+import { AuthService } from '@shared/auth/auth.service';
 
 interface DialogData {
     // res: object;
 }
 // declare var require: any;
-// const data: any = require('../../shared/data/company.json');
+// const data: any = require('@shared/data/company.json');
 
 
 @Component({
@@ -126,10 +126,7 @@ export class CompanyComponent {
                 width: '800px',
                 data: res
             });
-        }),
-        (err) => {
-
-        }
+        })
     }
 
     //Show Module Licenses Page By Group ID
