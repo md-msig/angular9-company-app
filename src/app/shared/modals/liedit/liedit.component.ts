@@ -63,6 +63,11 @@ export class LiEditComponent implements OnInit {
       return;
     }
     this.editLicenseForm.value.licenseType = this.editLicenseForm.value.licenseType.toLowerCase();
+    this.editLicenseForm.value.companyLicenseCount = parseInt(this.editLicenseForm.value.companyLicenseCount);
+    this.editLicenseForm.value.locationLicenseCount = parseInt(this.editLicenseForm.value.locationLicenseCount);
+    this.editLicenseForm.value.projectLicenseCount = parseInt(this.editLicenseForm.value.projectLicenseCount);
+    this.editLicenseForm.value.custInternalLicenseMaxCount = parseInt(this.editLicenseForm.value.custInternalLicenseMaxCount);
+    this.editLicenseForm.value.custExternalLicenseMaxCount = parseInt(this.editLicenseForm.value.custExternalLicenseMaxCount);
     let api = this.configservice.host_url + '/license/' + licenseId;
     return this.http.patch(api, JSON.stringify(this.editLicenseForm.value), { headers: this.headers })
       .subscribe(
