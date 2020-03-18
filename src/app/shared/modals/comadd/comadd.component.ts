@@ -2,8 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ConfigService } from './../../../shared/services/config.service';
-import { NGXToastrService } from './../../../shared/services/toastr.service'
+import { ConfigService } from '@shared/services/config.service';
+import { NGXToastrService } from '@shared/services/toastr.service';
 import { Router } from '@angular/router';
 
 interface DialogData {

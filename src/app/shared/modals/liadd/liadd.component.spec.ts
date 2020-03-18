@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ComAddComponent } from './comadd.component';
+import { LiAddComponent } from './liadd.component';
 
-describe('ComAddComponent', () => {
-  let component: ComAddComponent;
-  let fixture: ComponentFixture<ComAddComponent>;
+describe('LiAddComponent', () => {
+  let component: LiAddComponent;
+  let fixture: ComponentFixture<LiAddComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ComAddComponent ]
+      declarations: [ LiAddComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ComAddComponent);
+    fixture = TestBed.createComponent(LiAddComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

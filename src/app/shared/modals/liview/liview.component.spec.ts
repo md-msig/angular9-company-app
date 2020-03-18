@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ComViewComponent } from './comview.component';
+import { LiViewComponent } from './liview.component';
 
-describe('ComViewComponent', () => {
-  let component: ComViewComponent;
-  let fixture: ComponentFixture<ComViewComponent>;
+describe('LiViewComponent', () => {
+  let component: LiViewComponent;
+  let fixture: ComponentFixture<LiViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ComViewComponent ]
+      declarations: [ LiViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ComViewComponent);
+    fixture = TestBed.createComponent(LiViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

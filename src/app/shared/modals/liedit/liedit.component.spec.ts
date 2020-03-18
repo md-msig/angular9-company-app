@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ComEditComponent } from './comedit.component';
+import { LiEditComponent } from './liedit.component';
 
-describe('ComEditComponent', () => {
-  let component: ComEditComponent;
-  let fixture: ComponentFixture<ComEditComponent>;
+describe('LiEditComponent', () => {
+  let component: LiEditComponent;
+  let fixture: ComponentFixture<LiEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ComEditComponent ]
+      declarations: [ LiEditComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ComEditComponent);
+    fixture = TestBed.createComponent(LiEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

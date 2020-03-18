@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ConfigService } from './../../../shared/services/config.service';
-import { NGXToastrService } from './../../../shared/services/toastr.service'
+import { ConfigService } from '@shared/services/config.service';
+import { NGXToastrService } from '@shared/services/toastr.service';
 
 interface DialogData {
 }

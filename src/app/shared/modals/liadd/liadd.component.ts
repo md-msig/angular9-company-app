@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ConfigService } from './../../../shared/services/config.service';
-import { NGXToastrService } from './../../../shared/services/toastr.service';
+import { ConfigService } from '@shared/services/config.service';
+import { NGXToastrService } from '@shared/services/toastr.service';
 
 interface DialogData {
   email: string;
