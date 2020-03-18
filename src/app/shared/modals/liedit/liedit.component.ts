@@ -33,6 +33,7 @@ export class LiEditComponent implements OnInit {
   license_types = this.configservice.license_types;
   editLicenseForm: FormGroup;
   isSubmitted = false;
+  loading = false;
 
   ngOnInit() {
     this.editLicenseForm = this.fb.group({  
@@ -60,6 +61,7 @@ export class LiEditComponent implements OnInit {
     if (this.editLicenseForm.invalid) {
       return;
     }
+    this.loading = true;
     this.editLicenseForm.value.licenseType = this.editLicenseForm.value.licenseType.toLowerCase();
     this.editLicenseForm.value.companyLicenseCount = parseInt(this.editLicenseForm.value.companyLicenseCount);
     this.editLicenseForm.value.locationLicenseCount = parseInt(this.editLicenseForm.value.locationLicenseCount);

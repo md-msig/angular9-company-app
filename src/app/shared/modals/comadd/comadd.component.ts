@@ -31,6 +31,7 @@ export class ComAddComponent implements OnInit {
   headers = this.configservice.headers;
   addCompanyGroupForm: FormGroup;
   isSubmitted = false;
+  loading = false;
 
   ngOnInit() {
     this.addCompanyGroupForm = this.fb.group({
@@ -62,6 +63,7 @@ export class ComAddComponent implements OnInit {
     if (this.addCompanyGroupForm.invalid) {
       return;
     }
+    this.loading = true;
     let api = this.configservice.host_url + '/companygroup';
     return this.http.put(api, JSON.stringify(this.addCompanyGroupForm.value), { headers: this.headers })
       .subscribe(

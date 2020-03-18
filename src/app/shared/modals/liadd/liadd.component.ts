@@ -27,6 +27,7 @@ export class LiAddComponent implements OnInit {
   module_names = this.configservice.module_names;
   license_types = this.configservice.license_types;
   isSubmitted = false;
+  loading = false;
   serverCpu = this.configservice.serverCpu;
   serverIp = this.configservice.serverIp;
   serverMac = this.configservice.serverMac;
@@ -73,11 +74,10 @@ export class LiAddComponent implements OnInit {
   //Add Module License
   addModuleLicense() {
     this.isSubmitted = true;
-    // console.log(this.addLicenseForm);
-    // return;
     if (this.addLicenseForm.invalid) {
       return;
     }
+    this.loading = true;
     let api = this.configservice.host_url + '/license';
     return this.http.put(api, JSON.stringify(this.addLicenseForm.value), { headers: this.headers })
       .subscribe(

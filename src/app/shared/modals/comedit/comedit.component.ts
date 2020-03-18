@@ -31,6 +31,7 @@ export class ComEditComponent implements OnInit {
   headers = this.configservice.headers;
   editCompanyGroupForm: FormGroup;
   isSubmitted = false;
+  loading = false;
 
   ngOnInit() {
     this.editCompanyGroupForm = this.fb.group({
@@ -62,6 +63,7 @@ export class ComEditComponent implements OnInit {
     if (this.editCompanyGroupForm.invalid) {
       return;
     }
+    this.loading = true;
     this.editCompanyGroupForm.value.maxDevicePerUserCount = parseInt(this.editCompanyGroupForm.value.maxDevicePerUserCount);  //convert string value to int
     this.editCompanyGroupForm.value.failedLoginAttemptsToLockUser = parseInt(this.editCompanyGroupForm.value.failedLoginAttemptsToLockUser);  //convert string value to int
     let api = this.configservice.host_url + '/companygroup/' + group_id;

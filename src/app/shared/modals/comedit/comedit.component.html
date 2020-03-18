@@ -118,7 +118,8 @@
                             <i class="ft-x"></i> Cancel
                         </button>
                         <button type="submit" class="btn btn-raised btn-primary">
-                            <i class="fa fa-check-square-o"></i> Save
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            <i *ngIf="!loading" class="fa fa-check-square-o"></i> Save
                         </button>
                     </div>
                 </form>
