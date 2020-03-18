@@ -55,6 +55,14 @@
                                         *ngIf="isSubmitted && !editCompanyGroupForm.get('failedLoginAttemptsToLockUser').valid">This
                                         field is required and maxlength is 1</small>
                                 </div>
+                                <div class="form-group">
+                                    <div class="mt-1">
+                                        <div class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                                            <input type="checkbox" class="custom-control-input" id="isActive" formControlName="isActive">
+                                            <label class="custom-control-label" for="isActive">Is Enabled</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="form-group">
@@ -101,9 +109,6 @@
                                         formControlName="hqPostalCode"/>
                                     <small class="form-text text-muted danger"
                                         *ngIf="isSubmitted && !editCompanyGroupForm.get('hqPostalCode').valid">Maxlength is 20</small>
-                                </div>
-                                <div class="form-group">
-                                    <!-- <input type="text" class="form-control" formControlName="isActive" required placeholder="Is Enabled" /> -->
                                 </div>
                             </div>
                         </div>

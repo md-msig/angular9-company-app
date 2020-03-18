@@ -46,7 +46,7 @@ export class ComEditComponent implements OnInit {
       hqState: [this.detail_data.hqState, [Validators.required, Validators.maxLength(50)]],
       hqCountry: [this.detail_data.hqCountry, [Validators.required, Validators.maxLength(50)]],
       hqPostalCode: [this.detail_data.hqPostalCode, Validators.maxLength(20)],
-      isActive: [true] //should be changed
+      isActive: [this.detail_data.isActive] 
     })
   }
 

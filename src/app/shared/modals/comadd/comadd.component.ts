@@ -46,7 +46,7 @@ export class ComAddComponent implements OnInit {
       hqState: ['', [Validators.required, Validators.maxLength(50)]],
       hqCountry: ['', [Validators.required, Validators.maxLength(50)]],
       hqPostalCode: ['', Validators.maxLength(20)],
-      isActive: ['true'] //should be changed
+      isActive: [true] 
     })
   }
 
