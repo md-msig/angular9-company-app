@@ -34,18 +34,18 @@ export class ComEditComponent implements OnInit {
 
   ngOnInit() {
     this.editCompanyGroupForm = this.fb.group({
-      companyGroupName: [this.detail_data.companyGroupName, Validators.required],
-      websiteUrl: [this.detail_data.websiteUrl],
-      primaryContactEmail: [this.detail_data.primaryContactEmail],
-      primaryContactPhone: [this.detail_data.primaryContactPhone],
-      maxDevicePerUserCount: [this.detail_data.maxDevicePerUserCount, Validators.required],
-      failedLoginAttemptsToLockUser: [this.detail_data.failedLoginAttemptsToLockUser, Validators.required],
-      hqStreet1: [this.detail_data.hqStreet1],
-      hqStreet2: [this.detail_data.hqStreet2],
-      hqCity: [this.detail_data.hqCity, Validators.required],
-      hqState: [this.detail_data.hqState, Validators.required],
-      hqCountry: [this.detail_data.hqCountry, Validators.required],
-      hqPostalCode: [this.detail_data.hqPostalCode],
+      companyGroupName: [this.detail_data.companyGroupName, [Validators.required, Validators.maxLength(100)]],
+      websiteUrl: [this.detail_data.websiteUrl, Validators.maxLength(100)],
+      primaryContactEmail: [this.detail_data.primaryContactEmail, Validators.maxLength(100)],
+      primaryContactPhone: [this.detail_data.primaryContactPhone, Validators.maxLength(20)],
+      maxDevicePerUserCount: [this.detail_data.maxDevicePerUserCount, [Validators.required, Validators.maxLength(1)]],
+      failedLoginAttemptsToLockUser: [this.detail_data.failedLoginAttemptsToLockUser, [Validators.required, Validators.maxLength(1)]],
+      hqStreet1: [this.detail_data.hqStreet1, Validators.maxLength(100)],
+      hqStreet2: [this.detail_data.hqStreet2, Validators.maxLength(100)],
+      hqCity: [this.detail_data.hqCity, [Validators.required, Validators.maxLength(50)]],
+      hqState: [this.detail_data.hqState, [Validators.required, Validators.maxLength(50)]],
+      hqCountry: [this.detail_data.hqCountry, [Validators.required, Validators.maxLength(50)]],
+      hqPostalCode: [this.detail_data.hqPostalCode, Validators.maxLength(20)],
       isActive: [true] //should be changed
     })
   }
@@ -62,6 +62,8 @@ export class ComEditComponent implements OnInit {
     if (this.editCompanyGroupForm.invalid) {
       return;
     }
+    this.editCompanyGroupForm.value.maxDevicePerUserCount = parseInt(this.editCompanyGroupForm.value.maxDevicePerUserCount);  //convert string value to int
+    this.editCompanyGroupForm.value.failedLoginAttemptsToLockUser = parseInt(this.editCompanyGroupForm.value.failedLoginAttemptsToLockUser);  //convert string value to int
     let api = this.configservice.host_url + '/companygroup/' + group_id;
     return this.http.patch(api, JSON.stringify(this.editCompanyGroupForm.value), { headers: this.headers })
       .subscribe(

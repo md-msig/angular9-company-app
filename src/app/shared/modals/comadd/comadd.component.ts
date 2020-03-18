@@ -34,18 +34,18 @@ export class ComAddComponent implements OnInit {
 
   ngOnInit() {
     this.addCompanyGroupForm = this.fb.group({
-      companyGroupName: ['', Validators.required],
-      websiteUrl: [''],
-      primaryContactEmail: [''],
-      primaryContactPhone: [''],
-      maxDevicePerUserCount: ['5', Validators.required],
-      failedLoginAttemptsToLockUser: ['5', Validators.required],
-      hqStreet1: [''],
-      hqStreet2: [''],
-      hqCity: ['', Validators.required],
-      hqState: ['', Validators.required],
-      hqCountry: ['', Validators.required],
-      hqPostalCode: [''],
+      companyGroupName: ['', [Validators.required, Validators.maxLength(100)]],
+      websiteUrl: ['', Validators.maxLength(100)],
+      primaryContactEmail: ['', Validators.maxLength(100)],
+      primaryContactPhone: ['', Validators.maxLength(20)],
+      maxDevicePerUserCount: ['5', [Validators.required, Validators.maxLength(1)]],
+      failedLoginAttemptsToLockUser: ['5', [Validators.required, Validators.maxLength(1)]],
+      hqStreet1: ['', Validators.maxLength(100)],
+      hqStreet2: ['', Validators.maxLength(100)],
+      hqCity: ['', [Validators.required, Validators.maxLength(50)]],
+      hqState: ['', [Validators.required, Validators.maxLength(50)]],
+      hqCountry: ['', [Validators.required, Validators.maxLength(50)]],
+      hqPostalCode: ['', Validators.maxLength(20)],
       isActive: ['true'] //should be changed
     })
   }

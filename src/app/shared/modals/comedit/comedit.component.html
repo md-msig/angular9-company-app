@@ -10,105 +10,97 @@
                     <div class="form-body">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                <ul class="no-list-style" style="padding: 0;">
-                                    <li class="mb-2">
-                                        <span class="primary text-bold-500"><a> Group ID:</a></span> 
-                                        <span class="line-height-2 v-value overflow-hidden">{{ detail_data.id }}</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="form-group">
-                                    <div *ngIf="isSubmitted && formControls.companyGroupName.errors"
-                                        class="help-block">
-                                        <div *ngIf="formControls.companyGroupName.errors.required">Company Group
-                                            Name is required
-                                        </div>
-                                    </div>
-                                    <input
-                                        [ngClass]="{'has-error': isSubmitted && formControls.companyGroupName.errors }"
-                                        type="text" class="form-control" formControlName="companyGroupName"
-                                        placeholder="Group Company Name" />
+                                    <label for="companyGroupName">Company Group Name</label>
+                                    <input type="text" class="form-control" id="companyGroupName"
+                                        formControlName="companyGroupName" required />
+                                    <small class="form-text text-muted danger"
+                                        *ngIf="isSubmitted && !editCompanyGroupForm.get('companyGroupName').valid">This
+                                        field is required and maxlength is 100</small>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" formControlName="websiteUrl"
-                                        placeholder="Website URL" />
+                                    <label for="websiteUrl">Website Url</label>
+                                    <input type="text" class="form-control" id="websiteUrl"
+                                        formControlName="websiteUrl"/>
+                                    <small class="form-text text-muted danger"
+                                        *ngIf="isSubmitted && !editCompanyGroupForm.get('websiteUrl').valid">Maxlength is 100</small>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" formControlName="primaryContactEmail"
-                                        placeholder="Primay Contact Email" />
+                                    <label for="primaryContactEmail">Primay Contact Email</label>
+                                    <input type="text" class="form-control" id="primaryContactEmail"
+                                        formControlName="primaryContactEmail"/>
+                                    <small class="form-text text-muted danger"
+                                        *ngIf="isSubmitted && !editCompanyGroupForm.get('primaryContactEmail').valid">Maxlength is 100</small>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" formControlName="primaryContactPhone"
-                                        placeholder="Primay Contact Phone" />
+                                    <label for="primaryContactPhone">Primary Contact Phone</label>
+                                    <input type="text" class="form-control" id="primaryContactPhone"
+                                        formControlName="primaryContactPhone"/>
+                                    <small class="form-text text-muted danger"
+                                        *ngIf="isSubmitted && !editCompanyGroupForm.get('primaryContactPhone').valid">Maxlength is 20</small>
                                 </div>
                                 <div class="form-group">
-                                    <div *ngIf="isSubmitted && formControls.maxDevicePerUserCount.errors"
-                                        class="help-block">
-                                        <div *ngIf="formControls.maxDevicePerUserCount.errors.required">Max Device
-                                            Per User Count is required
-                                        </div>
-                                    </div>
-                                    <input
-                                        [ngClass]="{'has-error': isSubmitted && formControls.maxDevicePerUserCount.errors }"
-                                        type="text" class="form-control" formControlName="maxDevicePerUserCount"
-                                        placeholder="Max Devices Per User" />
+                                    <label for="maxDevicePerUserCount">Max Devices Per User</label>
+                                    <input type="text" class="form-control" id="maxDevicePerUserCount"
+                                        formControlName="maxDevicePerUserCount" required />
+                                    <small class="form-text text-muted danger"
+                                        *ngIf="isSubmitted && !editCompanyGroupForm.get('maxDevicePerUserCount').valid">This
+                                        field is required and maxlength is 1</small>
                                 </div>
                                 <div class="form-group">
-                                    <div *ngIf="isSubmitted && formControls.failedLoginAttemptsToLockUser.errors"
-                                        class="help-block">
-                                        <div *ngIf="formControls.failedLoginAttemptsToLockUser.errors.required">
-                                            Failed Login Attempts To Lock User is required
-                                        </div>
-                                    </div>
-                                    <input
-                                        [ngClass]="{'has-error': isSubmitted && formControls.failedLoginAttemptsToLockUser.errors }"
-                                        type="text" class="form-control"
-                                        formControlName="failedLoginAttemptsToLockUser"
-                                        placeholder="Failed Login Attempts to Lock" />
+                                    <label for="failedLoginAttemptsToLockUser">Failed Login Attempts to Lock</label>
+                                    <input type="text" class="form-control" id="failedLoginAttemptsToLockUser"
+                                        formControlName="failedLoginAttemptsToLockUser" required />
+                                    <small class="form-text text-muted danger"
+                                        *ngIf="isSubmitted && !editCompanyGroupForm.get('failedLoginAttemptsToLockUser').valid">This
+                                        field is required and maxlength is 1</small>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" formControlName="hqStreet1"
-                                        placeholder="Address 1" />
+                                    <label for="hqStreet1">Address 1</label>
+                                    <input type="text" class="form-control" id="hqStreet1"
+                                        formControlName="hqStreet1"/>
+                                    <small class="form-text text-muted danger"
+                                        *ngIf="isSubmitted && !editCompanyGroupForm.get('hqStreet1').valid">Maxlength is 100</small>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" formControlName="hqStreet2"
-                                        placeholder="Address 2" />
+                                    <label for="hqStreet2">Address 2</label>
+                                    <input type="text" class="form-control" id="hqStreet2"
+                                        formControlName="hqStreet2"/>
+                                    <small class="form-text text-muted danger"
+                                        *ngIf="isSubmitted && !editCompanyGroupForm.get('hqStreet2').valid">Maxlength is 100</small>
                                 </div>
                                 <div class="form-group">
-                                    <div *ngIf="isSubmitted && formControls.hqCity.errors" class="help-block">
-                                        <div *ngIf="formControls.hqCity.errors.required">City is required
-                                        </div>
-                                    </div>
-                                    <input [ngClass]="{'has-error': isSubmitted && formControls.hqCity.errors }"
-                                        type="text" class="form-control" formControlName="hqCity"
-                                        placeholder="City" />
+                                    <label for="hqCity">City</label>
+                                    <input type="text" class="form-control" id="hqCity"
+                                        formControlName="hqCity" required />
+                                    <small class="form-text text-muted danger"
+                                        *ngIf="isSubmitted && !editCompanyGroupForm.get('hqCity').valid">This
+                                        field is required and maxlength is 50</small>
                                 </div>
                                 <div class="form-group">
-                                    <div *ngIf="isSubmitted && formControls.hqState.errors" class="help-block">
-                                        <div *ngIf="formControls.hqState.errors.required">State is required
-                                        </div>
-                                    </div>
-                                    <input [ngClass]="{'has-error': isSubmitted && formControls.hqState.errors }"
-                                        type="text" class="form-control" formControlName="hqState"
-                                        placeholder="State" />
+                                    <label for="hqState">State</label>
+                                    <input type="text" class="form-control" id="hqState"
+                                        formControlName="hqState" required />
+                                    <small class="form-text text-muted danger"
+                                        *ngIf="isSubmitted && !editCompanyGroupForm.get('hqState').valid">This
+                                        field is required and maxlength is 50</small>
                                 </div>
                                 <div class="form-group">
-                                    <div *ngIf="isSubmitted && formControls.hqCountry.errors" class="help-block">
-                                        <div *ngIf="formControls.hqCountry.errors.required">Country is required
-                                        </div>
-                                    </div>
-                                    <input [ngClass]="{'has-error': isSubmitted && formControls.hqState.errors }"
-                                        type="text" class="form-control" formControlName="hqCountry"
-                                        placeholder="Country" />
+                                    <label for="hqCountry">Country</label>
+                                    <input type="text" class="form-control" id="hqCountry"
+                                        formControlName="hqCountry" required />
+                                    <small class="form-text text-muted danger"
+                                        *ngIf="isSubmitted && !editCompanyGroupForm.get('hqCountry').valid">This
+                                        field is required and maxlength is 50</small>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" formControlName="hqPostalCode"
-                                        placeholder="Postal Code" />
+                                    <label for="hqPostalCode">Postal Code</label>
+                                    <input type="text" class="form-control" id="hqPostalCode"
+                                        formControlName="hqPostalCode"/>
+                                    <small class="form-text text-muted danger"
+                                        *ngIf="isSubmitted && !editCompanyGroupForm.get('hqPostalCode').valid">Maxlength is 20</small>
                                 </div>
                                 <div class="form-group">
                                     <!-- <input type="text" class="form-control" formControlName="isActive" required placeholder="Is Enabled" /> -->
