@@ -3,9 +3,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfigService } from './../../../shared/services/config.service';
-import { NGXToastrService } from './../../../shared/services/toastr.service'
-import { catchError, map } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { NGXToastrService } from './../../../shared/services/toastr.service';
+import { Router } from '@angular/router';
 
 interface DialogData {
 }
@@ -24,6 +23,7 @@ export class ComEditComponent implements OnInit {
     public configservice: ConfigService,
     private http: HttpClient,
     private toastr_service: NGXToastrService,
+    public router: Router,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
       this.detail_data = data;
   }
@@ -73,23 +73,13 @@ export class ComEditComponent implements OnInit {
           if(err.status == "202" && err.error.text == "Company Modified") {
             this.dialogRef.close();
             this.toastr_service.typeSuccess(this.configservice.group_updated_successfully);
+            this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['company']);
+            });
           } else {
             this.toastr_service.timeout(err.error.text);
           }
         }
       )
-  }
-
-  // Error 
-  handleError(error: HttpErrorResponse) {
-    let msg = '';
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      msg = error.error.message;
-    } else {
-      // server-side error
-      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(msg);
   }
 }

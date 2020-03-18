@@ -5,9 +5,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { DatePipe } from '@angular/common';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfigService } from './../../../shared/services/config.service';
-import { NGXToastrService } from './../../../shared/services/toastr.service'
-import { catchError, map } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { NGXToastrService } from './../../../shared/services/toastr.service';
 
 interface DialogData {
   email: string;
@@ -89,24 +87,13 @@ export class LiAddComponent implements OnInit {
           if(err.status == "202") {
             this.dialogRef.close();
             this.toastr_service.typeSuccess(this.configservice.license_added_successfully);
-            this.router.navigate(['license']);
+            this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['license']);
+            });
           } else {
             this.toastr_service.timeout("Some errors are occured!");
           }
         }
       )
-  }
-
-  // Error 
-  handleError(error: HttpErrorResponse) {
-    let msg = '';
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      msg = error.error.message;
-    } else {
-      // server-side error
-      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(msg);
   }
 }

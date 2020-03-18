@@ -63,7 +63,8 @@ export class CustomizerComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.config = this.configService.templateConf;
-    this.isOpen = !this.config.layout.customizer.hidden;
+    // this.isOpen = !this.config.layout.customizer.hidden;
+    this.isOpen = false;
 
     if (this.config.layout.sidebar.size) {
       this.options.sidebarSize = this.config.layout.sidebar.size;

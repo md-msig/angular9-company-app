@@ -5,8 +5,6 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfigService } from './../../../shared/services/config.service';
 import { NGXToastrService } from './../../../shared/services/toastr.service'
-import { catchError, map } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
 
 interface DialogData {
 }
@@ -77,6 +75,9 @@ export class LiEditComponent implements OnInit {
           if(err.status == "202") {
             this.dialogRef.close();
             this.toastr_service.typeSuccess(this.configservice.license_updated_successfully);
+            this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['license']);
+            });
           } else {
             this.toastr_service.timeout("Some errors are occured!");
           }

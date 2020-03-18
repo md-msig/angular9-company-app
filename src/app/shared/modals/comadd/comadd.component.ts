@@ -4,8 +4,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfigService } from './../../../shared/services/config.service';
 import { NGXToastrService } from './../../../shared/services/toastr.service'
-import { catchError, map } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 interface DialogData {
   email: string;
@@ -25,6 +24,7 @@ export class ComAddComponent implements OnInit {
     public configservice: ConfigService,
     private http: HttpClient,
     private toastr_service: NGXToastrService,
+    public router: Router,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
   }
 
@@ -46,7 +46,7 @@ export class ComAddComponent implements OnInit {
       hqState: ['', [Validators.required, Validators.maxLength(50)]],
       hqCountry: ['', [Validators.required, Validators.maxLength(50)]],
       hqPostalCode: ['', Validators.maxLength(20)],
-      isActive: [true] 
+      isActive: [true]
     })
   }
 
@@ -63,29 +63,18 @@ export class ComAddComponent implements OnInit {
       return;
     }
     let api = this.configservice.host_url + '/companygroup';
-    this.headers = this.headers.append('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
     return this.http.put(api, JSON.stringify(this.addCompanyGroupForm.value), { headers: this.headers })
       .subscribe(
         (res: any) => {
           this.dialogRef.close();
           this.toastr_service.typeSuccess(this.configservice.group_added_successfully);
+          this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['company']);
+          });
         },
         (err) => {
           this.toastr_service.timeout(err.error);
         }
       )
-  }
-
-  // Error 
-  handleError(error: HttpErrorResponse) {
-    let msg = '';
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      msg = error.error.message;
-    } else {
-      // server-side error
-      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(msg);
   }
 }
