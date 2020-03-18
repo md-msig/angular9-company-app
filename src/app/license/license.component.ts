@@ -9,6 +9,7 @@ import { Observable, throwError } from 'rxjs';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LiAddComponent } from './../shared/modals/liadd/liadd.component';
 import { LiEditComponent } from './../shared/modals/liedit/liedit.component';
+import { LiViewComponent } from './../shared/modals/liview/liview.component';
 import { ConfigService } from './../shared/services/config.service';
 import { AuthService } from './../shared/auth/auth.service';
 
@@ -59,7 +60,7 @@ export class LicenseComponent {
     headers = this.configservice.headers;
     group_filter;
     isAddLicenseHidden;
-
+                        
     updateFilter(event) {
         const val = event.target.value.toLowerCase();
         // filter data
@@ -122,6 +123,27 @@ export class LicenseComponent {
         this.configservice.group_filter = event.target.value;
         this.configservice.isAddLicenseHidden = (event.target.value != "all") ? false : true ;
         this.getModuleLicenses();
+    }
+
+    //View Module License Detail
+    moduleLicenseDetail(license_id){
+        let api = this.configservice.host_url + '/license/' + license_id;
+        this.http.get(api, { headers: this.headers }).subscribe(
+            (res : any) => {
+                let com_api = this.configservice.host_url + '/companygroup/' + res.companyGroupId;
+                this.http.get(com_api, { headers: this.headers }).subscribe(
+                    (c_res : any) => {
+                        this.dialog.open(LiViewComponent, {
+                            width: '800px',
+                            data: { detail: res, companyGroupName: c_res.companyGroupName}
+                        });
+                    }
+                );
+            },
+            (err : any) => {
+
+            }
+        )
     }
 
     //Add Module License

@@ -6,14 +6,14 @@ interface DialogData {
 }
 
 @Component({
-  selector: 'app-comview',
-  templateUrl: './comview.component.html',
-  styleUrls: ['./comview.component.scss']
+  selector: 'app-liview',
+  templateUrl: './liview.component.html',
+  styleUrls: ['./liview.component.scss']
 })
-export class ComViewComponent implements OnInit {
+export class LiViewComponent implements OnInit {
 
   constructor(
-    public dialogRef: MatDialogRef<ComViewComponent>,
+    public dialogRef: MatDialogRef<LiViewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   onNoClick(): void {

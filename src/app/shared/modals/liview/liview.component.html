@@ -1,0 +1,68 @@
+<div style="position: relative;"><span class="btn btn-raised btn-sm btn-danger btn-round close-button" (click)="onNoClick()"><i class="fa fa-times"></i></span></div>
+<h1 mat-dialog-title>Module License Details</h1>
+<div mat-dialog-content>
+  <div class="col-sm-12">
+    <div class="card">
+        <div class="card-content">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        <ul class="no-list-style">
+                            <li class="mb-2">
+                                <span class="primary text-bold-500"><a> Company Group Id:</a></span> 
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.companyGroupId }}</span>
+                            </li>
+                            <li class="mb-2">
+                                <span class="primary text-bold-500"><a> Group Company Name:</a></span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.companyGroupName }}</span>
+                            </li>
+                            <li class="mb-2">
+                                <span class="primary text-bold-500"><a> Module Name:</a></span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.moduleName }}</span>
+                            </li>
+                            <li class="mb-2">
+                                <span class="primary text-bold-500"><a> Company License Count:</a></span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.companyLicenseCount }}</span>
+                            </li>
+                            <li class="mb-2">
+                                <span class="primary text-bold-500"><a> Location License Count:</a></span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.locationLicenseCount }}</span>
+                            </li> 
+                            <li class="mb-2">
+                                <span class="primary text-bold-500"><a> Project License Count:</a></span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.projectLicenseCount }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        <ul class="no-list-style">
+                            <li class="mb-2">
+                                <span class="primary text-bold-500"><a> Internal User Count:</a></span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.custInternalLicenseMaxCount }}</span>
+                            </li>
+                            <li class="mb-2">
+                                <span class="primary text-bold-500"><a> External User Count:</a></span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.custExternalLicenseMaxCount }}</span>
+                            </li>
+                            <li class="mb-2">
+                                <span class="primary text-bold-500"><a> License Type:</a></span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.licenseType }}</span>
+                            </li>
+                            <li class="mb-2">
+                                <span class="primary text-bold-500"><a> License Start Date:</a></span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.licenseStartDate }}</span>
+                            </li>
+                            <li class="mb-2">
+                                <span class="primary text-bold-500"><a> License End Date:</a></span>
+                                <span class="line-height-2 v-value overflow-hidden">{{ data.detail.licenseEndDate }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+</div>

@@ -21,12 +21,12 @@
                 [footerHeight]="50" [rowHeight]="'auto'" [limit]="15" [rows]='rows'
                 [sorts]="[{prop: 'licenseEndDate', dir: 'desc'}]">
 
-                <ngx-datatable-column name="Group ID" prop="companyGroupId">
-                    <!-- <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-                    <span class='link' (click)='companyGroupDetails(row.id)'>{{ value }}</span>
-                </ng-template> -->
+                <ngx-datatable-column name="Group ID" prop="companyGroupId"></ngx-datatable-column>
+                <ngx-datatable-column name="Module Name" prop="moduleName">
+                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                        <span class='link' (click)='moduleLicenseDetail(row.licenseId)'>{{ value }}</span>
+                    </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Module Name" prop="moduleName"></ngx-datatable-column>
                 <ngx-datatable-column name="Int User" prop="custInternalLicenseMaxCount"></ngx-datatable-column>
                 <ngx-datatable-column name="Ext User" prop="custExternalLicenseMaxCount"></ngx-datatable-column>
                 <ngx-datatable-column name="Int Used" prop="custInternalLicenseUsedCount"></ngx-datatable-column>
@@ -42,7 +42,6 @@
                         <span class="action-edit" (click)='modifyLicenseDetails(row.licenseId)'>Edit</span>
                     </ng-template>
                 </ngx-datatable-column>
-
             </ngx-datatable>
         </div>
     </div>

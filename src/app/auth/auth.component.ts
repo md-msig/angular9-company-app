@@ -32,8 +32,6 @@ export class AuthComponent implements OnInit {
 
   host_url = this.configService.host_url;
   headers = this.configService.headers;
-
-  
   
   ngOnInit(): void {
     this.loginForm = this.fb.group({
