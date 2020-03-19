@@ -8,10 +8,9 @@ import {
   OnDestroy,
   ViewChild
 } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
-import { ConfigService } from "app/shared/services/config.service";
+import { ConfigService } from "@shared/services/config.service";
 import { DOCUMENT } from "@angular/common";
-import { LayoutService } from "app/shared/services/layout.service";
+import { LayoutService } from "@shared/services/layout.service";
 import { Subscription } from "rxjs";
 
 var fireRefreshEventOnWindow = function() {

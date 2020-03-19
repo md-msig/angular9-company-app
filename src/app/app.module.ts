@@ -26,7 +26,6 @@ import {
 
 //Components Import Start
 import { AppComponent } from "./app.component";
-import { ContentLayoutComponent } from "./layouts/content/content-layout.component";
 import { FullLayoutComponent } from "./layouts/full/full-layout.component";
 import { LoginComponent } from '@app/login/login.component';
 //Components Import End
@@ -49,7 +48,7 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, FullLayoutComponent, ContentLayoutComponent, LoginComponent],
+  declarations: [AppComponent, FullLayoutComponent, LoginComponent],
   imports: [
     BrowserAnimationsModule,
     // DateTimePickerModule,

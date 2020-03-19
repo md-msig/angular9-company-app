@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Subject, BehaviorSubject } from "rxjs";
 import { TemplateConfig } from "../template-config/config.interface";
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: "root"

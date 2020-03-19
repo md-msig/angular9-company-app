@@ -4,7 +4,6 @@ import { ROUTES } from './sidebar-routes.config';
 import { RouteInfo } from "./sidebar.metadata";
 import { Router, ActivatedRoute } from "@angular/router";
 import { TranslateService } from '@ngx-translate/core';
-import { customAnimations } from "../animations/custom-animations";
 import { ConfigService } from '../services/config.service';
 import { LayoutService } from '../services/layout.service';
 import { Subscription } from 'rxjs';
@@ -12,7 +11,6 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: "app-sidebar",
   templateUrl: "./sidebar.component.html",
-  animations: customAnimations
 })
 export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
 
