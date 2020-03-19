@@ -17,7 +17,7 @@
             
             <ngx-datatable-column name="Group ID" prop="id">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-                    <span class='link' (click)='companyGroupDetails(row.id)'>{{ value }}</span>
+                    <span class='action' (click)='companyGroupDetails(row.id)'>{{ value }}</span>
                 </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Name" prop="companyGroupName"></ngx-datatable-column>
@@ -34,8 +34,8 @@
             </ngx-datatable-column>
             <ngx-datatable-column name="Actions" prop="action">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-                    <span class="action-edit" (click)='modifyCompanyDetails(row.id)'>Edit</span>
-                    <span class="action-license" (click)='moduleLicenses(row)'>Licenses</span>
+                    <span class="action" (click)='modifyCompanyDetails(row.id)'>Edit</span>
+                    <span class="action ml-1" (click)='moduleLicenses(row)'>Licenses</span>
                 </ng-template>
             </ngx-datatable-column>
 

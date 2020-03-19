@@ -112,7 +112,7 @@ export class CompanyComponent {
     //Add Company Group
     addCompanyGroup() {
         const dialogRef = this.dialog.open(ComAddComponent, {
-            width: '800px',
+            width: '800px', 
             data: {}
         });
     }

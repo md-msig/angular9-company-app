@@ -14,6 +14,7 @@ import { ErrorInterceptor } from '@shared/auth/error.interceptor';
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { StoreModule } from "@ngrx/store";
+// import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
 
 import {
   PerfectScrollbarModule,
@@ -51,6 +52,7 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [AppComponent, FullLayoutComponent, ContentLayoutComponent, LoginComponent],
   imports: [
     BrowserAnimationsModule,
+    // DateTimePickerModule,
     ReactiveFormsModule,
     FormsModule,
     StoreModule.forRoot({}),
@@ -69,7 +71,7 @@ export function createTranslateLoader(http: HttpClient) {
     AgmCoreModule.forRoot({
       apiKey: "YOUR KEY"
     }),
-    PerfectScrollbarModule,
+    PerfectScrollbarModule
   ],
   providers: [
     AuthService,

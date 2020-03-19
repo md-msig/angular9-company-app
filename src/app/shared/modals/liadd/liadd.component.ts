@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfigService } from '@shared/services/config.service';
 import { NGXToastrService } from '@shared/services/toastr.service';
+// import { DateTimePickerComponent } from '@syncfusion/ej2-angular-calendars';
 
 interface DialogData {
   email: string;
@@ -19,6 +20,7 @@ interface DialogData {
   
 })
 export class LiAddComponent implements OnInit {
+  // @ViewChild('ejDateTimePicker') ejDateTimePicker: DateTimePickerComponent;
   group_filter;
   companyName;
 

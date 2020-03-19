@@ -11,7 +11,7 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                     <div class="form-group">
-                                        <label for="companyGroupName">Company Group Name</label>
+                                        <label for="companyGroupName">Company Group Name<label class="ml-1 text-danger">*</label></label>
                                         <input type="text" class="form-control" id="companyGroupName"
                                             formControlName="companyGroupName" required />
                                         <small class="form-text text-muted danger"
@@ -40,7 +40,7 @@
                                             *ngIf="isSubmitted && !addCompanyGroupForm.get('primaryContactPhone').valid">Maxlength is 20</small>
                                     </div>
                                     <div class="form-group">
-                                        <label for="maxDevicePerUserCount">Max Devices Per User</label>
+                                        <label for="maxDevicePerUserCount">Max Devices Per User<label class="ml-1 text-danger">*</label></label>
                                         <input type="text" class="form-control" id="maxDevicePerUserCount"
                                             formControlName="maxDevicePerUserCount" required />
                                         <small class="form-text text-muted danger"
@@ -48,7 +48,7 @@
                                             field is required and maxlength is 1</small>
                                     </div>
                                     <div class="form-group">
-                                        <label for="failedLoginAttemptsToLockUser">Failed Login Attempts to Lock</label>
+                                        <label for="failedLoginAttemptsToLockUser">Failed Login Attempts to Lock<label class="ml-1 text-danger">*</label></label>
                                         <input type="text" class="form-control" id="failedLoginAttemptsToLockUser"
                                             formControlName="failedLoginAttemptsToLockUser" required />
                                         <small class="form-text text-muted danger"
@@ -80,7 +80,7 @@
                                             *ngIf="isSubmitted && !addCompanyGroupForm.get('hqStreet2').valid">Maxlength is 100</small>
                                     </div>
                                     <div class="form-group">
-                                        <label for="hqCity">City</label>
+                                        <label for="hqCity">City<label class="ml-1 text-danger">*</label></label>
                                         <input type="text" class="form-control" id="hqCity"
                                             formControlName="hqCity" required />
                                         <small class="form-text text-muted danger"
@@ -88,7 +88,7 @@
                                             field is required and maxlength is 50</small>
                                     </div>
                                     <div class="form-group">
-                                        <label for="hqState">State</label>
+                                        <label for="hqState">State<label class="ml-1 text-danger">*</label></label>
                                         <input type="text" class="form-control" id="hqState"
                                             formControlName="hqState" required />
                                         <small class="form-text text-muted danger"
@@ -96,7 +96,7 @@
                                             field is required and maxlength is 50</small>
                                     </div>
                                     <div class="form-group">
-                                        <label for="hqCountry">Country</label>
+                                        <label for="hqCountry">Country<label class="ml-1 text-danger">*</label></label>
                                         <input type="text" class="form-control" id="hqCountry"
                                             formControlName="hqCountry" required />
                                         <small class="form-text text-muted danger"
@@ -113,7 +113,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-actions right">
+                        <div class="form-actions right pb-0 mt-0">
                             <button type="button" (click)="onNoClick()" class="btn btn-raised btn-warning mr-1">
                                 <i class="ft-x"></i> Cancel
                             </button>
@@ -127,6 +127,4 @@
             </div>
         </div>
     </div>
-</div>
-<div mat-dialog-actions>
 </div>

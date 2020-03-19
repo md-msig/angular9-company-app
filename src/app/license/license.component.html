@@ -24,7 +24,7 @@
                 <ngx-datatable-column name="Group ID" prop="companyGroupId"></ngx-datatable-column>
                 <ngx-datatable-column name="Module Name" prop="moduleName">
                     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-                        <span class='link' (click)='moduleLicenseDetail(row.licenseId)'>{{ value }}</span>
+                        <span class='action' (click)='moduleLicenseDetail(row.licenseId)'>{{ value }}</span>
                     </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Int User" prop="custInternalLicenseMaxCount"></ngx-datatable-column>
@@ -39,7 +39,7 @@
                 <ngx-datatable-column name="Dtnull Date" prop="dtnullDate"></ngx-datatable-column>
                 <ngx-datatable-column name="Edit" prop="edit">
                     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-                        <span class="action-edit" (click)='modifyLicenseDetails(row.licenseId)'>Edit</span>
+                        <span class="action" (click)='modifyLicenseDetails(row.licenseId)'>Edit</span>
                     </ng-template>
                 </ngx-datatable-column>
             </ngx-datatable>

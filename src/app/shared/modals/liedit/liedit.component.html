@@ -32,7 +32,7 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                     <div class="form-group">
-                                        <label for="companyLicenseCount">Company License Count</label>
+                                        <label for="companyLicenseCount">Company License Count<label class="ml-1 text-danger">*</label></label>
                                         <input type="text" class="form-control" id="companyLicenseCount"
                                             formControlName="companyLicenseCount" required />
                                         <small class="form-text text-muted danger"
@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                     <div class="form-group">
-                                        <label for="locationLicenseCount">Location License Count</label>
+                                        <label for="locationLicenseCount">Location License Count<label class="ml-1 text-danger">*</label></label>
                                         <input type="text" class="form-control" id="locationLicenseCount"
                                             formControlName="locationLicenseCount" required />
                                         <small class="form-text text-muted danger"
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                     <div class="form-group">
-                                        <label for="projectLicenseCount">Project License Count</label>
+                                        <label for="projectLicenseCount">Project License Count<label class="ml-1 text-danger">*</label></label>
                                         <input type="text" class="form-control" id="projectLicenseCount"
                                             formControlName="projectLicenseCount" required />
                                         <small class="form-text text-muted danger"
@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                     <div class="form-group">
-                                        <label for="custInternalLicenseMaxCount">Internal User Count</label>
+                                        <label for="custInternalLicenseMaxCount">Internal User Count<label class="ml-1 text-danger">*</label></label>
                                         <input type="text" class="form-control" id="custInternalLicenseMaxCount"
                                             formControlName="custInternalLicenseMaxCount" required />
                                         <small class="form-text text-muted danger"
@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                     <div class="form-group">
-                                        <label for="custExternalLicenseMaxCount">External User Count</label>
+                                        <label for="custExternalLicenseMaxCount">External User Count<label class="ml-1 text-danger">*</label></label>
                                         <input type="text" class="form-control" id="custExternalLicenseMaxCount"
                                             formControlName="custExternalLicenseMaxCount" required />
                                         <small class="form-text text-muted danger"
@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                     <div class="form-group">
-                                        <label for="licenseType">License Type  </label>
+                                        <label for="licenseType">License Type<label class="ml-1 text-danger">*</label></label>
                                         <select class="form-control" id="licenseType" formControlName="licenseType">
                                             <option *ngFor="let type of license_types | keyvalue" value="{{type.key}}"
                                                 [selected]="type.key == (detail_data.licenseType | lowercase)">
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                     <div class="form-group">
-                                        <label for="licenseStartDate">License Start Date</label>
+                                        <label for="licenseStartDate">License Start Date<label class="ml-1 text-danger">*</label></label>
                                         <input type="datetime" class="form-control" id="licenseStartDate"
                                             formControlName="licenseStartDate" required />
                                         <small class="form-text text-muted danger"
@@ -103,7 +103,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                     <div class="form-group">
-                                        <label for="licenseEndDate">License End Date</label>
+                                        <label for="licenseEndDate">License End Date<label class="ml-1 text-danger">*</label></label>
                                         <input type="datetime" class="form-control" id="licenseEndDate"
                                             formControlName="licenseEndDate" required />
                                         <small class="form-text text-muted danger"
@@ -113,7 +113,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-actions right">
+                        <div class="form-actions right pb-0 mt-0">
                             <button type="button" (click)="onNoClick()" class="btn btn-raised btn-warning mr-1">
                                 <i class="ft-x"></i> Cancel
                             </button>
@@ -127,6 +127,4 @@
             </div>
         </div>
     </div>
-</div>
-<div mat-dialog-actions>
 </div>
