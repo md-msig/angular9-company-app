@@ -24,10 +24,6 @@ export class LoginComponent implements OnInit {
     private titleService: Title
   ) {
     this.titleService.setTitle(this.configService.page_titles.login);
-
-    if (this.authService.currentUserValue) {
-      this.router.navigate(['company']);
-    }
   }
   loginForm: FormGroup;
   isSubmitted = false;

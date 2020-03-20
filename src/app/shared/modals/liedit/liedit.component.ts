@@ -25,7 +25,7 @@ export class LiEditComponent implements OnInit {
     private toastr_service: NGXToastrService,
     private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-      this.detail_data = data;
+    this.detail_data = data;
   }
 
   headers = this.configservice.headers;
@@ -36,7 +36,7 @@ export class LiEditComponent implements OnInit {
   loading = false;
 
   ngOnInit() {
-    this.editLicenseForm = this.fb.group({  
+    this.editLicenseForm = this.fb.group({
       companyGroupId: [this.detail_data.companyGroupId],
       companyLicenseCount: [this.detail_data.companyLicenseCount, [Validators.required, Validators.maxLength(2)]],
       locationLicenseCount: [this.detail_data.locationLicenseCount, [Validators.required, Validators.maxLength(2)]],
@@ -45,10 +45,16 @@ export class LiEditComponent implements OnInit {
       custExternalLicenseMaxCount: [this.detail_data.custExternalLicenseMaxCount, [Validators.required, Validators.maxLength(4)]],
       licenseType: [this.detail_data.licenseType, Validators.required],
       licenseStartDate: [this.detail_data.licenseStartDate, Validators.required],
-      licenseEndDate: [this.detail_data.licenseEndDate, Validators.required]
-    }, {updateOn: 'blur'});
+      licenseEndDate: [this.detail_data.licenseEndDate, Validators.required],
+      dtnullDate: [this.detail_data.dtnullDate, Validators.required],
+      dtnullError: [this.detail_data.dtnullError, [Validators.required, Validators.maxLength(200)]]
+    }, { updateOn: 'blur' });
   }
 
+  reloadWindow() {
+    this.router.navigateByUrl('/').then(
+      () => { this.router.navigateByUrl('license'); });
+  }
   get formControls() { return this.editLicenseForm.controls; }
 
   onNoClick(): void {
@@ -74,12 +80,10 @@ export class LiEditComponent implements OnInit {
         (res: any) => {
         },
         (err) => {
-          if(err.status == "202") {
+          if (err.status == "202") {
             this.dialogRef.close();
             this.toastr_service.typeSuccess(this.configservice.license_updated_successfully);
-            this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-              this.router.navigate(['license']);
-            });
+            this.reloadWindow();
           } else {
             this.toastr_service.timeout("Some errors are occured!");
           }

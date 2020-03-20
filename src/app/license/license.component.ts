@@ -1,10 +1,8 @@
 import { Component, ViewChild, TemplateRef } from '@angular/core';
-import {Title} from "@angular/platform-browser";
+import { Title } from "@angular/platform-browser";
 import { DatatableComponent } from "@swimlane/ngx-datatable";
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { catchError, map } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LiAddComponent } from '@shared/modals/liadd/liadd.component';
@@ -16,6 +14,9 @@ import { AuthService } from '@shared/auth/auth.service';
 interface DialogData {
     // res: object;
 }
+
+declare var require: any;
+const data1: any = require('@shared/test.json');
 
 @Component({
     selector: 'app-license',
@@ -30,19 +31,19 @@ export class LicenseComponent {
     data;
     group_companies;
     columns = [
-        { name: 'Group ID', prop: 'companyGroupId', sortable: 'true'},
-        { name: 'Module Name', prop: 'moduleName', sortable: 'true'},
-        { name: 'Int User', prop: 'custInternalLicenseMaxCount', sortable: 'true'},
-        { name: 'Ext User', prop: 'custExternalLicenseMaxCount', sortable: 'true'},
-        { name: 'Int Used', prop: 'custInternalLicenseUsedCount', sortable: 'true'},
-        { name: 'Ext Used', prop: 'custExternalLicenseUsedCount', sortable: 'true'},
-        { name: 'Company', prop: 'companyLicenseCount', sortable: 'true'},
-        { name: 'Location', prop: 'locationLicenseCount', sortable: 'true'},
-        { name: 'Project', prop: 'projectLicenseCount', sortable: 'true'},
-        { name: 'Start', prop: 'licenseStartDate', sortable: 'true'},
-        { name: 'End', prop: 'licenseEndDate', sortable: 'true'},
-        { name: 'Dtnull Date', prop: 'dtnullDate', sortable: 'true'},
-        { name: 'Edit', prop: 'edit', sortable: 'false'},
+        { name: 'Group ID', prop: 'companyGroupId', sortable: 'true' },
+        { name: 'Module Name', prop: 'moduleName', sortable: 'true' },
+        { name: 'Int User', prop: 'custInternalLicenseMaxCount', sortable: 'true' },
+        { name: 'Ext User', prop: 'custExternalLicenseMaxCount', sortable: 'true' },
+        { name: 'Int Used', prop: 'custInternalLicenseUsedCount', sortable: 'true' },
+        { name: 'Ext Used', prop: 'custExternalLicenseUsedCount', sortable: 'true' },
+        { name: 'Company', prop: 'companyLicenseCount', sortable: 'true' },
+        { name: 'Location', prop: 'locationLicenseCount', sortable: 'true' },
+        { name: 'Project', prop: 'projectLicenseCount', sortable: 'true' },
+        { name: 'Start', prop: 'licenseStartDate', sortable: 'true' },
+        { name: 'End', prop: 'licenseEndDate', sortable: 'true' },
+        { name: 'Dtnull Date', prop: 'dtnullDate', sortable: 'true' },
+        { name: 'Edit', prop: 'edit', sortable: 'false' },
     ];
 
     constructor(
@@ -58,9 +59,9 @@ export class LicenseComponent {
     }
 
     headers = this.configservice.headers;
-    group_filter;
-    isAddLicenseHidden;
-                        
+    group_filter;   //Group Compnay Filter
+    isAddLicenseHidden;     //Add License Button flag (hidden or shown)
+
     updateFilter(event) {
         const val = event.target.value.toLowerCase();
         // filter data
@@ -85,20 +86,30 @@ export class LicenseComponent {
         this.isAddLicenseHidden = this.configservice.isAddLicenseHidden;
         let api = this.configservice.host_url + '/licenses';
         let companyapi = this.configservice.host_url + '/companygroup';
-        if(this.group_filter != "all") {
-            api += '/'+this.group_filter;
-            companyapi += '/'+this.group_filter;
+        if (this.group_filter != "all") {
+            api += '/' + this.group_filter;
+            companyapi += '/' + this.group_filter;
             this.http.get(companyapi, { headers: this.headers }).subscribe(
                 (res: any) => {
                     this.configservice.companyName = res.companyGroupName;
                 }
             )
-        }else {
+        } else {
             this.configservice.companyName = '';
         }
         this.http.get(api, { headers: this.headers }).subscribe(
             (res: any) => {
                 this.data = res;
+                this.data.sort((a, b) => {
+                    let b_dt = b.licenseEndDate.split(' ');
+                    let a_dt = a.licenseEndDate.split(' ');
+                    b_dt[0] = b_dt[0].split('-').reverse().join('-');
+                    b_dt = b_dt.join(' ');
+
+                    a_dt[0] = a_dt[0].split('-').reverse().join('-');
+                    a_dt = a_dt.join(' ');
+                    return new Date(b_dt).getTime() - new Date(a_dt).getTime();
+                });
                 this.temp = [...this.data];
                 this.rows = this.data;
             }
@@ -108,7 +119,7 @@ export class LicenseComponent {
     //Get Group Company List and Set "group_companies" variable
     setGroupCompanies(): void {
         let com_group_api = this.configservice.host_url + '/companygroups';
-        this.http.get(com_group_api, {headers: this.headers}).subscribe(
+        this.http.get(com_group_api, { headers: this.headers }).subscribe(
             (res: any) => {
                 this.group_companies = res;
             }
@@ -118,21 +129,21 @@ export class LicenseComponent {
     //Change Group Company
     changeGroupCompany(event) {
         this.configservice.group_filter = event.target.value;
-        this.configservice.isAddLicenseHidden = (event.target.value != "all") ? false : true ;
+        this.configservice.isAddLicenseHidden = (event.target.value != "all") ? false : true;
         this.getModuleLicenses();
     }
 
     //View Module License Detail
-    moduleLicenseDetail(license_id){
+    moduleLicenseDetail(license_id) {
         let api = this.configservice.host_url + '/license/' + license_id;
         this.http.get(api, { headers: this.headers }).subscribe(
-            (res : any) => {
+            (res: any) => {
                 let com_api = this.configservice.host_url + '/companygroup/' + res.companyGroupId;
                 this.http.get(com_api, { headers: this.headers }).subscribe(
-                    (c_res : any) => {
+                    (c_res: any) => {
                         this.dialog.open(LiViewComponent, {
                             width: '800px',
-                            data: { detail: res, companyGroupName: c_res.companyGroupName}
+                            data: { detail: res, companyGroupName: c_res.companyGroupName }
                         });
                     }
                 );
@@ -152,11 +163,11 @@ export class LicenseComponent {
     modifyLicenseDetails(id) {
         let api = this.configservice.host_url + '/license/' + id;
         this.http.get(api, { headers: this.headers }).subscribe(
-        (res) => {
-            const dialogRef = this.dialog.open(LiEditComponent, {
-                width: '800px',
-                data: res
-            });
-        })
+            (res) => {
+                const dialogRef = this.dialog.open(LiEditComponent, {
+                    width: '800px',
+                    data: res
+                });
+            })
     }
 }

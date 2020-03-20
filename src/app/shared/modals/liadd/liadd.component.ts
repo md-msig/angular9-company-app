@@ -63,8 +63,15 @@ export class LiAddComponent implements OnInit {
       licenseEndDate: [this.str_date, Validators.required],
       serverCpu: [this.serverCpu],
       serverIp: [this.serverIp],
-      serverMac: [this.serverMac]
+      serverMac: [this.serverMac],
+      dtnullDate: [this.str_date, Validators.required],
+      dtnullError: ['', [Validators.required, Validators.maxLength(200)]],
     }, {updateOn: 'blur'});
+  }
+
+  reloadWindow() {
+    this.router.navigateByUrl('/').then(
+      () => { this.router.navigateByUrl('license'); });
   }
 
   get formControls() { return this.addLicenseForm.controls; }
@@ -89,11 +96,9 @@ export class LiAddComponent implements OnInit {
           if(err.status == "202") {
             this.dialogRef.close();
             this.toastr_service.typeSuccess(this.configservice.license_added_successfully);
-            this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-              this.router.navigate(['license']);
-            });
-          } else {
-            this.toastr_service.timeout("Some errors are occured!");
+            this.reloadWindow();
+          } else if(err.status == "400"){
+            this.toastr_service.timeout("Company Group is disabled.");
           }
         }
       )

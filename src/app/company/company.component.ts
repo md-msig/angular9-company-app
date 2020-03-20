@@ -16,8 +16,6 @@ import { AuthService } from '@shared/auth/auth.service';
 interface DialogData {
     // res: object;
 }
-// declare var require: any;
-// const data: any = require('@shared/data/company.json');
 
 
 @Component({
@@ -49,6 +47,27 @@ export class CompanyComponent {
     ) {
         this.titleService.setTitle(this.configservice.page_titles.company);
         this.configservice.cu_page = this.configservice.page_titles.company;
+
+        this.getGroupCompanies().subscribe(
+            (res) => {
+            this.data = res;
+            this.data.sort((a, b) => {
+                let b_dt = b.date_modified.split(' ');
+                let a_dt = a.date_modified.split(' ');
+                b_dt[0] = b_dt[0].split('-').reverse().join('-');
+                b_dt = b_dt.join(' ');
+
+                a_dt[0] = a_dt[0].split('-').reverse().join('-');
+                a_dt = a_dt.join(' ');
+                return new Date(b_dt).getTime() - new Date(a_dt).getTime();
+            });
+            this.temp = [...this.data];
+            this.rows = this.data;
+            },
+            (err) => {
+                this.router.navigate(['auth']);
+            }
+        )
     }
 
     headers = this.configservice.headers;
@@ -66,16 +85,7 @@ export class CompanyComponent {
     }
 
     ngOnInit() {
-        this.getGroupCompanies().subscribe(
-            (res) => {
-            this.data = res;
-            this.temp = [...this.data];
-            this.rows = this.data;
-            },
-            (err) => {
-                this.router.navigate(['auth']);
-            }
-        )
+        
     }
 
     // Company Groups

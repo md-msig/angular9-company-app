@@ -111,6 +111,26 @@
                                             field is required</small>
                                     </div>
                                 </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label for="dtnullDate">Dtnull Date Time<label class="ml-1 text-danger">*</label></label>
+                                        <input type="datetime" class="form-control" id="dtnullDate"
+                                            formControlName="dtnullDate" required />
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !editLicenseForm.get('dtnullDate').valid">This
+                                            field is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label for="dtnullError">Dtnull Error<label class="ml-1 text-danger">*</label></label>
+                                        <input type="text" class="form-control" id="dtnullError"
+                                            formControlName="dtnullError" required />
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !editLicenseForm.get('dtnullError').valid">This
+                                            field is required and maxlength is 200</small>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-actions right pb-0 mt-0">

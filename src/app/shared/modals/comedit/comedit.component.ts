@@ -51,6 +51,11 @@ export class ComEditComponent implements OnInit {
     })
   }
 
+  reloadWindow() {
+    this.router.navigateByUrl('/').then(
+      () => { this.router.navigateByUrl('company'); });
+  }
+
   get formControls() { return this.editCompanyGroupForm.controls; }
 
   onNoClick(): void {
@@ -75,9 +80,7 @@ export class ComEditComponent implements OnInit {
           if(err.status == "202" && err.error.text == "Company Modified") {
             this.dialogRef.close();
             this.toastr_service.typeSuccess(this.configservice.group_updated_successfully);
-            this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-              this.router.navigate(['company']);
-            });
+            this.reloadWindow();
           } else {
             this.toastr_service.timeout(err.error.text);
           }

@@ -51,6 +51,11 @@ export class ComAddComponent implements OnInit {
     })
   }
 
+  reloadWindow() {
+    this.router.navigateByUrl('/').then(
+      () => { this.router.navigateByUrl('company'); });
+  }
+
   get formControls() { return this.addCompanyGroupForm.controls; }
 
   onNoClick(): void {
@@ -70,9 +75,7 @@ export class ComAddComponent implements OnInit {
         (res: any) => {
           this.dialogRef.close();
           this.toastr_service.typeSuccess(this.configservice.group_added_successfully);
-          this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-            this.router.navigate(['company']);
-          });
+          this.reloadWindow();
         },
         (err) => {
           this.toastr_service.timeout(err.error);
