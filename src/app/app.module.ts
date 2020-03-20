@@ -14,7 +14,7 @@ import { ErrorInterceptor } from '@shared/auth/error.interceptor';
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { StoreModule } from "@ngrx/store";
-// import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { DateTimePickerModule } from "@syncfusion/ej2-angular-calendars";
 
 import {
   PerfectScrollbarModule,
@@ -48,11 +48,15 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, FullLayoutComponent, LoginComponent],
+  declarations: [
+    AppComponent, 
+    FullLayoutComponent, 
+    LoginComponent,
+  ],
   imports: [
     BrowserAnimationsModule,
-    // DateTimePickerModule,
     ReactiveFormsModule,
+    DateTimePickerModule,
     FormsModule,
     StoreModule.forRoot({}),
     AppRoutingModule,

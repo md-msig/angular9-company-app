@@ -6,7 +6,7 @@ import { DatePipe } from '@angular/common';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfigService } from '@shared/services/config.service';
 import { NGXToastrService } from '@shared/services/toastr.service';
-// import { DateTimePickerComponent } from '@syncfusion/ej2-angular-calendars';
+import { DateTimePickerComponent } from '@syncfusion/ej2-angular-calendars';
 
 interface DialogData {
   email: string;
@@ -20,7 +20,8 @@ interface DialogData {
   
 })
 export class LiAddComponent implements OnInit {
-  // @ViewChild('ejDateTimePicker') ejDateTimePicker: DateTimePickerComponent;
+  @ViewChild('ejDateTimePicker') ejDateTimePicker: DateTimePickerComponent;
+  public placeholder: String = 'Select date and time';
   group_filter;
   companyName;
 
@@ -59,8 +60,10 @@ export class LiAddComponent implements OnInit {
       custInternalLicenseMaxCount: [0, [Validators.required, Validators.maxLength(3)]],
       custExternalLicenseMaxCount: [0, [Validators.required, Validators.maxLength(4)]],
       licenseType: ['named', Validators.required],
-      licenseStartDate: [this.str_date, Validators.required],
-      licenseEndDate: [this.str_date, Validators.required],
+      // licenseStartDate: [this.str_date, Validators.required],
+      // licenseEndDate: [this.str_date, Validators.required],
+      licenseStartDate: ['', Validators.required],
+      licenseEndDate: ['', Validators.required],
       serverCpu: [this.serverCpu],
       serverIp: [this.serverIp],
       serverMac: [this.serverMac],

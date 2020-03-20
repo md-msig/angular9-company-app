@@ -106,51 +106,59 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label for="licenseStartDate">License Start Date<label class="ml-1 text-danger">*</label></label>
                                         <input type="datetime" class="form-control" id="licenseStartDate"
                                             formControlName="licenseStartDate" required />
                                         <small class="form-text text-muted danger"
                                             *ngIf="isSubmitted && !addLicenseForm.get('licenseStartDate').valid">This
                                             field is required</small>
-                                    </div>
-                                    <!-- <div class="form-group">
-                                        <ejs-datetimepicker #ejDateTimePicker formControlName="licenseStartDate"
-                                            name="licenseStartDate" [placeholder]='placeholder' floatLabelType='Auto'>
-                                        </ejs-datetimepicker>
-                                        <div *ngIf="licenseStartDate.invalid && (licenseStartDate.dirty||licenseStartDate.touched)"
-                                            class="alert alert-danger">
-                                            Enter Date and time in "MM/dd/yyyy hh:mm a" format.
-                                        </div>
                                     </div> -->
+                                    <div class="form-group">
+                                        <label for="licenseStartDate">License Start Date<label class="ml-1 text-danger">*</label></label>
+                                        <ejs-datetimepicker #ejDateTimePicker formControlName="licenseStartDate"
+                                            name="licenseStartDate" floatLabelType='Auto'>
+                                        </ejs-datetimepicker>
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !addLicenseForm.get('licenseStartDate').valid">This
+                                            field is required</small>
+                                    </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label for="licenseEndDate">License End Date<label class="ml-1 text-danger">*</label></label>
                                         <input type="datetime" class="form-control" id="licenseEndDate"
                                             formControlName="licenseEndDate" required />
                                         <small class="form-text text-muted danger"
                                             *ngIf="isSubmitted && !addLicenseForm.get('licenseEndDate').valid">This
                                             field is required</small>
-                                    </div>
-                                    <!-- <div class="form-group">
-                                        <ejs-datetimepicker #ejDateTimePicker formControlName="licenseEndDate"
-                                            name="licenseEndDate" [placeholder]='placeholder' floatLabelType='Auto'>
-                                        </ejs-datetimepicker>
-                                        <div *ngIf="licenseEndDate.invalid && (licenseEndDate.dirty||licenseEndDate.touched)"
-                                            class="alert alert-danger">
-                                            Enter Date and time in "MM/dd/yyyy hh:mm a" format.
-                                        </div>
                                     </div> -->
+                                    <div class="form-group">
+                                        <label for="licenseEndDate">License End Date<label class="ml-1 text-danger">*</label></label>
+                                        <ejs-datetimepicker #ejDateTimePicker formControlName="licenseEndDate"
+                                            name="licenseEndDate" floatLabelType='Auto'>
+                                        </ejs-datetimepicker>
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !addLicenseForm.get('licenseEndDate').valid">This
+                                            field is required</small>
+                                    </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                     <div class="form-group">
                                         <label for="dtnullDate">Dtnull Date Time<label class="ml-1 text-danger">*</label></label>
+                                        <ejs-datetimepicker #ejDateTimePicker formControlName="dtnullDate"
+                                            name="dtnullDate" floatLabelType='Auto'>
+                                        </ejs-datetimepicker>
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="isSubmitted && !addLicenseForm.get('dtnullDate').valid">This
+                                            field is required</small>
+
+                                        <!-- <label for="dtnullDate">Dtnull Date Time<label class="ml-1 text-danger">*</label></label>
                                         <input type="datetime" class="form-control" id="dtnullDate"
                                             formControlName="dtnullDate" required />
                                         <small class="form-text text-muted danger"
                                             *ngIf="isSubmitted && !addLicenseForm.get('dtnullDate').valid">This
-                                            field is required</small>
+                                            field is required</small> -->
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">

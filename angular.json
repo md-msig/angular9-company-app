@@ -37,7 +37,15 @@
               "node_modules/@swimlane/ngx-datatable/assets/icons.css",
               "src/assets/css/demo.css",
               "src/assets/sass/app.scss",
-              "src/styles.css"
+              "src/styles.css",
+              "./node_modules/@syncfusion/ej2-base/styles/material.css",
+              "./node_modules/@syncfusion/ej2-buttons/styles/material.css",
+              "./node_modules/@syncfusion/ej2-inputs/styles/material.css",
+              "./node_modules/@syncfusion/ej2-popups/styles/material.css",
+              "./node_modules/@syncfusion/ej2-lists/styles/material.css",
+              "./node_modules/@syncfusion/ej2-splitbuttons/styles/material.css",
+              "./node_modules/@syncfusion/ej2-calendars/styles/material.css",
+              "./node_modules/@syncfusion/ej2-angular-calendars/styles/material.css"
             ],
             "scripts": [
               "src/assets/vendor/pace/pace.min.js"

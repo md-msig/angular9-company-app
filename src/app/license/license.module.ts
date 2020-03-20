@@ -9,6 +9,7 @@ import { LicenseComponent } from "@app/license/license.component";
 import { LiAddComponent } from '@shared/modals/liadd/liadd.component';
 import { LiEditComponent } from '@shared/modals/liedit/liedit.component';
 import { MaterialModule } from '@app/material.module';
+import { DateTimePickerModule } from "@syncfusion/ej2-angular-calendars";
 
 @NgModule({
     imports: [
@@ -18,6 +19,7 @@ import { MaterialModule } from '@app/material.module';
         MaterialModule,
         ReactiveFormsModule,
         FormsModule,
+        DateTimePickerModule,
     ],
     declarations: [
         LicenseComponent, LiAddComponent, LiEditComponent
