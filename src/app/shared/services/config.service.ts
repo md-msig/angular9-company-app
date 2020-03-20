@@ -9,6 +9,8 @@ export class ConfigService {
   unauthorized_msg = 'Unauthorized User. Please contact administrator for access.';
   welcome_msg = 'Welcome, please login to your account.';
   expired_msg = 'Session expired. Please login again.';
+
+  login_message = this.welcome_msg;
   host_url = 'http://ec2-3-7-8-26.ap-south-1.compute.amazonaws.com:8080';
   // host_url = 'http://localhost:8080';
   group_id = '@1435984529';
@@ -17,6 +19,7 @@ export class ConfigService {
   serverCpu = "45454545";
   serverIp = "222.2.21.2";
   serverMac = "565565656";
+  error = '';
 
   module_names = {
     "selectone": "Select One",

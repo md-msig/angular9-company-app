@@ -29,9 +29,8 @@ export class LoginComponent implements OnInit {
   isSubmitted = false;
   loading = false;
   returnUrl: string;
-  error = '';
-
-  message = this.configService.welcome_msg;
+  error = this.configService.error;
+  message = this.configService.login_message;
 
   host_url = this.configService.host_url;
   headers = this.configService.headers;

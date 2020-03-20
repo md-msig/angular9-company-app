@@ -63,9 +63,6 @@ export class CompanyComponent {
             });
             this.temp = [...this.data];
             this.rows = this.data;
-            },
-            (err) => {
-                this.router.navigate(['auth']);
             }
         )
     }
@@ -114,8 +111,7 @@ export class CompanyComponent {
         return this.http.get(api, { headers: this.headers }).pipe(
             map((res: Response) => {
                 return res || {}
-            }),
-            catchError(this.handleError)
+            })
         )
     }
 
@@ -145,18 +141,5 @@ export class CompanyComponent {
         this.configservice.companyName = companyGroup.companyGroupName;
         this.configservice.isAddLicenseHidden = false;
         this.router.navigate(['license']);
-    }
-
-    // Error 
-    handleError(error: HttpErrorResponse) {
-        let msg = '';
-        if (error.error instanceof ErrorEvent) {
-            // client-side error
-            msg = error.error.message;
-        } else {
-            // server-side error
-            msg = 'Error Code: ${error.status}\nMessage: ${error.message}';
-        }
-        return throwError(msg);
     }
 }

@@ -34,7 +34,9 @@ export class AuthService {
     let api = this.host_url + '/auth';
     return this.http.post<any>(api, JSON.stringify(user), { headers: this.headers })
       .pipe(map(res => {
-        if ((typeof res == 'object') && (res['role'] == 'ROLE_ERPADMIN' || res['role'] == 'ROLE_ERPAUTHADMIN' || res['role'] == 'ROLE_ERPUSER')) {
+        // console.log(res.role);
+        // return;
+        if (res.role == 'ROLE_ERPADMIN' || res.role == 'ROLE_ERPAUTHADMIN' || res.role == 'ROLE_ERPUSER') {
           localStorage.setItem('access_token', res.token);
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(res);
