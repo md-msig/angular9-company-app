@@ -21,7 +21,6 @@ interface DialogData {
 })
 export class LiAddComponent implements OnInit {
   @ViewChild('ejDateTimePicker') ejDateTimePicker: DateTimePickerComponent;
-  public placeholder: String = 'Select date and time';
   group_filter;
   companyName;
 
@@ -34,7 +33,8 @@ export class LiAddComponent implements OnInit {
   serverCpu = this.configservice.serverCpu;
   serverIp = this.configservice.serverIp;
   serverMac = this.configservice.serverMac;
-  str_date;
+  cDate;
+  minEndDate;
   constructor(
     public fb: FormBuilder,
     public dialogRef: MatDialogRef<LiAddComponent>,
@@ -46,8 +46,8 @@ export class LiAddComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
       this.group_filter = this.configservice.group_filter;
       this.companyName = this.configservice.companyName;
-      let myDate = new Date();
-      this.str_date = this.datePipe.transform(myDate, 'dd-MM-yyyy hh:mm:ss');
+      this.cDate = new Date();
+      this.cDate.setHours(0,0,0,0);
   }
 
   ngOnInit() {
@@ -60,14 +60,12 @@ export class LiAddComponent implements OnInit {
       custInternalLicenseMaxCount: [0, [Validators.required, Validators.maxLength(3)]],
       custExternalLicenseMaxCount: [0, [Validators.required, Validators.maxLength(4)]],
       licenseType: ['named', Validators.required],
-      // licenseStartDate: [this.str_date, Validators.required],
-      // licenseEndDate: [this.str_date, Validators.required],
-      licenseStartDate: ['', Validators.required],
-      licenseEndDate: ['', Validators.required],
+      licenseStartDate: [this.cDate, Validators.required],
+      licenseEndDate: [this.cDate, Validators.required],
       serverCpu: [this.serverCpu],
       serverIp: [this.serverIp],
       serverMac: [this.serverMac],
-      dtnullDate: [this.str_date, Validators.required],
+      dtnullDate: [this.cDate, Validators.required],
       dtnullError: ['', [Validators.required, Validators.maxLength(200)]],
     }, {updateOn: 'blur'});
   }
@@ -90,6 +88,9 @@ export class LiAddComponent implements OnInit {
       return;
     }
     this.loading = true;
+    this.addLicenseForm.value.licenseStartDate = this.datePipe.transform(this.addLicenseForm.value.licenseStartDate,'dd-MM-yyyy HH:mm:ss');
+    this.addLicenseForm.value.licenseEndDate = this.datePipe.transform(this.addLicenseForm.value.licenseEndDate,'dd-MM-yyyy HH:mm:ss');
+    this.addLicenseForm.value.dtnullDate = this.datePipe.transform(this.addLicenseForm.value.dtnullDate,'dd-MM-yyyy HH:mm:ss');
     let api = this.configservice.host_url + '/license';
     return this.http.put(api, JSON.stringify(this.addLicenseForm.value), { headers: this.headers })
       .subscribe(
